@@ -12,7 +12,8 @@ DEFAULT_DB = os.path.expanduser('~/workspace/quantdb/quant.db')
 UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 SLIST_HOSTS = ['push2.eastmoney.com', '82.push2.eastmoney.com']
 # 非题材类板块过滤：指数成分、通道类、地域板块、风格/业绩标签不算影响涨跌的概念
-_SKIP_SUB = ('融资融券', '沪股通', '深股通', '港股通', 'MSCI', '富时', '标普', '转融券', '季报', '年报')
+_SKIP_SUB = ('融资融券', '沪股通', '深股通', '港股通', 'MSCI', '富时', '标普', '转融券', '季报', '年报',
+             '中证', '深成', '上证', '深证', '沪深', 'GDR', '创业板', '科创板')
 
 
 def _get_json(url, hosts=None):
