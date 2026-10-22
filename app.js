@@ -72,6 +72,7 @@ function emFetch(hosts, path) {
     serverWatch = d.watch || [];
     renderWatchList();
     renderLadder(d.ladder);
+    renderSentiment(d.sentiment);
   }).catch(function () {
     document.getElementById('error').style.display = 'block';
     document.getElementById('date').textContent = '暂无';
@@ -102,6 +103,31 @@ function emFetch(hosts, path) {
         + ' ' + (x.f3 > 0 ? '+' : '') + Number(x.f3).toFixed(2) + '%</span></span>';
     }).join('');
   }).catch(function () {});
+
+
+  function renderSentiment(s) {
+    var el = document.getElementById('sentiment');
+    if (!s) { el.innerHTML = '<p class="hint">暂无数据</p>'; return; }
+    var f = s.facts || {}, p = s.parts || {};
+    var html = '<div class="sentMain"><span class="sentStage">' + s.stage + '</span>'
+      + '<span class="sentScore">情绪分 ' + s.score + ' / 100</span></div>';
+    html += '<div class="sentFacts">涨停 <b class="up">' + f.zt + '</b> 家 · 跌停 <b class="dn">' + f.dt
+      + '</b> 家 · 最高 ' + f.max_boards + ' 连板 · 连板股 ' + f.lianban + ' 只</div>';
+    if (f.effect_avg !== null && f.effect_avg !== undefined) {
+      html += '<div class="sentFacts">昨日涨停今日平均 <b class="' + (f.effect_avg >= 0 ? 'up' : 'dn') + '">'
+        + (f.effect_avg >= 0 ? '+' : '') + f.effect_avg + '%</b>（红盘率 ' + Math.round((f.effect_red || 0) * 100) + '%）'
+        + (f.leader ? ' · 昨日龙头 ' + f.leader.name + ' 今日 ' + (f.leader.pct >= 0 ? '+' : '') + f.leader.pct + '%' : '') + '</div>';
+    } else {
+      html += '<div class="sentFacts" style="color:#8b949e">赚钱效应（昨日涨停今日表现）：明日起开始积累</div>';
+    }
+    html += '<div class="sentParts">分项：涨停热度 ' + p.zt + '/25 · 连板高度 ' + p.boards + '/20 · 赚钱效应 '
+      + (p.effect === null || p.effect === undefined ? '—' : p.effect + '/30') + ' · 市场广度 ' + p.breadth + '/25 · 跌停扣 ' + p.dt_penalty + '</div>';
+    if (s.retreat) html += '<div class="retreat">退潮警报：' + s.retreat + '</div>';
+    if (s.position_ref) html += '<div class="posref">心法仓位对照：' + s.position_ref + '</div>';
+    if (s.xinfa) html += '<div class="xinfa">今日心法 · 第' + s.xinfa.no + '条<br>' + s.xinfa.text
+      + '<br><a href="xinfa.html">心法全文 →</a></div>';
+    el.innerHTML = html;
+  }
 
   // 连板梯队（随 latest.json 每日更新）
   function renderLadder(l) {
