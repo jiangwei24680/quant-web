@@ -46,6 +46,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;padding:18px 0 26px;lin
 canvas{width:100%;display:block;background:#0d1117;border:1px solid var(--border);border-radius:8px}
 .loading{color:var(--dim);font-size:13px;padding:16px 0;text-align:center}
 .score{font-weight:700}
+.parts{font-size:10px;color:var(--dim);font-weight:400;white-space:nowrap}
+td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
 .globals{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:12px}
 .gchip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 9px;font-size:12px}
 .gchip .p{margin-left:5px;font-variant-numeric:tabular-nums}
@@ -57,6 +59,17 @@ canvas{width:100%;display:block;background:#0d1117;border:1px solid var(--border
 .lgroup .s{display:inline-block;background:#0d1117;border:1px solid var(--border);border-radius:6px;padding:2px 8px;margin:2px 4px 2px 0;font-size:12px;cursor:pointer}
 .lgroup .s i{color:var(--dim);font-style:normal;margin-left:4px;font-size:11px}
 .lsum{font-size:13px;margin-bottom:6px}
+.stat.clickable{cursor:pointer}
+.stat.clickable .l{color:#58a6ff}
+.lk{cursor:pointer;text-decoration:underline dotted}
+.chips{margin:8px 0 4px}
+.chip{background:#0d1117;border:1px solid var(--border);color:#c9d1d9;border-radius:14px;padding:4px 12px;margin:0 6px 6px 0;font-size:12px;cursor:pointer}
+.chip.on{background:#1f6feb;border-color:#1f6feb;color:#fff}
+.morebtn{display:block;width:100%;background:#0d1117;border:1px solid var(--border);color:#58a6ff;border-radius:8px;padding:9px 0;margin-top:8px;font-size:13px;cursor:pointer}
+.watchedit{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.watchedit input{background:#0d1117;border:1px solid var(--border);color:#e6edf3;border-radius:8px;padding:7px 10px;font-size:13px;width:170px}
+.watchedit button{background:#0d1117;border:1px solid var(--border);color:#c9d1d9;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
+.watch-del{color:#f85149;cursor:pointer;font-weight:700;margin-left:8px;font-size:14px}
 </style>
 </head>
 <body>
@@ -72,19 +85,44 @@ canvas{width:100%;display:block;background:#0d1117;border:1px solid var(--border
 <section class="card">
   <h2>市场概览</h2>
   <div class="overview">
-    <div class="stat"><div class="v" id="total">–</div><div class="l">股票总数</div></div>
-    <div class="stat"><div class="v up" id="up">–</div><div class="l">上涨家数</div></div>
-    <div class="stat"><div class="v dn" id="down">–</div><div class="l">下跌家数</div></div>
-    <div class="stat"><div class="v" id="flat">–</div><div class="l">平盘家数</div></div>
+    <div class="stat clickable" data-list="all"><div class="v" id="total">–</div><div class="l">股票总数 ▸看名单</div></div>
+    <div class="stat clickable" data-list="up"><div class="v up" id="up">–</div><div class="l">上涨家数 ▸看名单</div></div>
+    <div class="stat clickable" data-list="down"><div class="v dn" id="down">–</div><div class="l">下跌家数 ▸看名单</div></div>
+    <div class="stat clickable" data-list="flat"><div class="v" id="flat">–</div><div class="l">平盘家数 ▸看名单</div></div>
   </div>
+</section>
+
+<section class="card" id="moversCard" style="display:none">
+  <h2 id="moversTitle">名单</h2>
+  <div class="chips" id="moversChips">
+    <button data-p="all" class="chip on">全部</button><button data-p="60" class="chip">60 沪市</button><button data-p="00" class="chip">00 深市</button><button data-p="30" class="chip">30 创业</button><button data-p="68" class="chip">68 科创</button><button data-p="bj" class="chip">北交所</button>
+  </div>
+  <p class="hint" id="moversCount"></p>
+  <table><thead><tr><th>股票</th><th>现价</th><th>涨跌幅</th><th>净流入(亿)</th></tr></thead>
+  <tbody id="moversBody"></tbody></table>
+  <button id="moversMore" class="morebtn" style="display:none">显示更多</button>
+  <p class="hint">点任意股票查看 60 日 K 线和今日分时。</p>
 </section>
 
 <section class="card">
   <h2>量化选股榜<span class="sub">策略卡</span></h2>
   <p class="strat" id="stratMeta">策略加载中…</p>
-  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>总分</th></tr></thead>
+  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>总分</th><th>风险参考</th></tr></thead>
   <tbody id="screen"></tbody></table>
-  <p class="hint">点任意股票查看 60 日 K 线和今日分时。</p>
+  <p class="hint">总分下面是四项明细：趋势/资金/动量/活跃。风险参考看三样：60日涨幅（涨太多要小心）、市盈率、换手率。点任意股票查看 60 日 K 线和今日分时。</p>
+</section>
+
+<section class="card">
+  <h2>观察名单<span class="sub">圈定后连看几天</span></h2>
+  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>净流入(亿)</th><th>估值/换手</th></tr></thead>
+  <tbody id="watch"></tbody></table>
+  <div class="watchedit">
+    <input id="watchInput" placeholder="输入6位股票代码" inputmode="numeric" maxlength="6">
+    <button id="watchAdd">添加</button>
+    <button id="watchSync">同步名单</button>
+    <button id="watchReset">恢复默认</button>
+  </div>
+  <p class="hint">名单里的股票每天收盘后更新，并在每日收盘总结里附评分和涨跌变化，连看几天再决定。在面板里加/删先存在你这台设备上（行尾 × 删除），改完点"同步名单"，每日数据和收盘总结就跟上新名单。</p>
 </section>
 
 <section class="card">
@@ -118,6 +156,6 @@ canvas{width:100%;display:block;background:#0d1117;border:1px solid var(--border
   </div>
 </div>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
