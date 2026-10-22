@@ -126,7 +126,7 @@ function emFetch(hosts, path) {
   // ---------- 全市场名单（点概览/涨停跌停数字展开） ----------
   var moversData = null, ladderData = null, curList = 'all', curPrefix = 'all', curRows = [], shownCount = 0;
   var PAGE = 300;
-  var LIST_TITLES = { all: '全部股票（按涨幅排序）', up: '上涨股票（按涨幅排序）', down: '下跌股票（按跌幅排序）', flat: '平盘股票', zt: '今日涨停', dt: '今日跌停' };
+  var LIST_TITLES = { all: '全部股票（按涨幅排序）', up: '上涨股票（按涨幅排序）', down: '下跌股票（按跌幅排序）', flat: '平盘股票', zt: '今日涨停', dt: '今日跌停（按跌幅排序）' };
   function prefixOk(code) {
     if (curPrefix === 'all') return true;
     if (curPrefix === 'bj') return /^[98]/.test(code);
@@ -145,9 +145,16 @@ function emFetch(hosts, path) {
   }
   function applyList() {
     var items;
-    if (curList === 'zt' || curList === 'dt') {
-      var src = (ladderData && ladderData[curList + '_list']) || [];
+    if (curList === 'zt') {
+      var src = (ladderData && ladderData.zt_list) || [];
       items = src.map(function (s) { return { c: s.code, n: s.name, p: null, pc: s.pct, mn: null }; });
+    } else if (curList === 'dt') {
+      // 跌停池接口只给家数不给名单，改从全市场数据按各板块跌停幅度筛
+      items = (moversData || []).filter(function (x) {
+        var lim = /^[98]/.test(x.c) ? -29.7 : (/^(30|68)/.test(x.c) ? -19.7 : ((x.n || '').indexOf('ST') >= 0 ? -4.7 : -9.7));
+        return x.pc !== null && x.pc !== undefined && x.pc <= lim;
+      }).sort(function (a, b) { return a.pc - b.pc; })
+      .map(function (x) { return { c: x.c, n: x.n, p: x.p, pc: x.pc, mn: x.mn }; });
     } else {
       items = (moversData || []).slice();
       if (curList === 'up') items = items.filter(function (x) { return x.pc > 0; }).sort(function (a, b) { return b.pc - a.pc; });
@@ -165,7 +172,7 @@ function emFetch(hosts, path) {
     var card = document.getElementById('moversCard');
     card.style.display = 'block';
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if ((kind === 'zt' || kind === 'dt') || moversData) { applyList(); return; }
+    if (kind === 'zt' || moversData) { applyList(); return; }
     document.getElementById('moversBody').innerHTML = '<tr><td colspan="4" style="text-align:left;color:#8b949e">名单加载中…</td></tr>';
     fetch('data/movers.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
       moversData = d.items || [];
