@@ -14,7 +14,7 @@ POOL, DEEP, TOP = 150, 60, 15
 
 
 def main():
-    rows = qt.clist('f6', 'f2,f3,f6,f8,f12,f14,f24,f62,f184', pz=POOL)
+    rows = qt.clist('f6', 'f2,f3,f6,f8,f9,f12,f14,f24,f62,f184', pz=POOL)
     rows = [r for r in rows if isinstance(r.get('f2'), (int, float)) and r['f2'] > 0
             and 'ST' not in r['f14']]
     rows = [r for r in rows if isinstance(r.get('f24'), (int, float)) and r['f24'] > 0][:DEEP]
@@ -29,6 +29,7 @@ def main():
             scored.append({'code': r['f12'], 'name': r['f14'], 'price': r['f2'],
                            'pct': r['f3'], 'amt_yi': round((r.get('f6') or 0) / 1e8, 1),
                            'turnover': r.get('f8'), 'g60': r.get('f24'),
+                           'pe': r.get('f9'),
                            'main_net': r.get('f62'), 'score': total,
                            'parts': list(parts)})
         except Exception as e:
