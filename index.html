@@ -70,6 +70,16 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
 .watchedit input{background:#0d1117;border:1px solid var(--border);color:#e6edf3;border-radius:8px;padding:7px 10px;font-size:13px;width:170px}
 .watchedit button{background:#0d1117;border:1px solid var(--border);color:#c9d1d9;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
 .watch-del{color:#f85149;cursor:pointer;font-weight:700;margin-left:8px;font-size:14px}
+.sentMain{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sentStage{font-size:24px;font-weight:700}
+.sentScore{color:var(--dim);font-size:13px}
+.sentFacts{font-size:13px;line-height:1.8}
+.sentParts{color:var(--dim);font-size:12px;line-height:1.7}
+.retreat{color:#ffb4a9;background:#3d1d1d;border:1px solid #7a2e2e;border-radius:8px;padding:8px 10px;font-size:13px;margin:8px 0}
+.posref{font-size:13px;margin-top:6px}
+.xinfa{margin-top:10px;background:#0d1117;border:1px solid var(--border);border-left:3px solid #1f6feb;border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.75;color:#c9d1d9}
+.xinfa a{color:#58a6ff}
+
 </style>
 </head>
 <body>
@@ -90,6 +100,11 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
     <div class="stat clickable" data-list="down"><div class="v dn" id="down">–</div><div class="l">下跌家数 ▸看名单</div></div>
     <div class="stat clickable" data-list="flat"><div class="v" id="flat">–</div><div class="l">平盘家数 ▸看名单</div></div>
   </div>
+</section>
+
+<section class="card" id="sentCard">
+  <h2>情绪周期<span class="sub">按游资心法口径 · 数据说话</span></h2>
+  <div id="sentiment"><p class="hint">加载中…</p></div>
 </section>
 
 <section class="card" id="moversCard" style="display:none">
@@ -156,6 +171,6 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
   </div>
 </div>
 
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
