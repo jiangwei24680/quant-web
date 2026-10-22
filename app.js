@@ -38,11 +38,27 @@ function emFetch(hosts, path) {
       + '<td class="' + cls + '">' + fmtYi(it.main_net) + '</td></tr>';
   };
   var screenRow = function (it) {
+    var parts = (it.parts && it.parts.length === 4)
+      ? '<br><span class="parts">趋' + it.parts[0] + ' 资' + it.parts[1] + ' 动' + it.parts[2] + ' 活' + it.parts[3] + '</span>' : '';
+    var risk = '<td class="risk">60日 ' + fmtPct(it.g60)
+      + '<br>PE ' + (typeof it.pe === 'number' ? it.pe.toFixed(1) : '—')
+      + '<br>换手 ' + (typeof it.turnover === 'number' ? it.turnover.toFixed(2) + '%' : '—') + '</td>';
     return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + '</span></td>'
       + conceptCell(it.concepts)
       + '<td>' + (it.price === null ? '–' : Number(it.price).toFixed(2)) + '</td>'
       + '<td>' + fmtPct(it.pct) + '</td>'
-      + '<td class="score">' + it.score + '</td></tr>';
+      + '<td class="score">' + it.score + parts + '</td>'
+      + risk + '</tr>';
+  };
+  var watchRow = function (it) {
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + '</span></td>'
+      + conceptCell(it.concepts)
+      + '<td>' + (it.price === null || it.price === undefined ? '–' : Number(it.price).toFixed(2)) + '</td>'
+      + '<td>' + fmtPct(it.pct) + '</td>'
+      + '<td class="' + (it.main_net > 0 ? 'up' : (it.main_net < 0 ? 'dn' : '')) + '">'
+      + (it.main_net === null || it.main_net === undefined ? '—' : fmtYi(it.main_net)) + '</td>'
+      + '<td class="risk">PE ' + (typeof it.pe === 'number' ? it.pe.toFixed(1) : '—')
+      + '<br>换手 ' + (typeof it.turnover === 'number' ? it.turnover.toFixed(2) + '%' : '—') + '</td></tr>';
   };
 
   fetch('data/latest.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
@@ -53,6 +69,8 @@ function emFetch(hosts, path) {
     document.getElementById('flat').textContent = d.flat;
     document.getElementById('top-in').innerHTML = d.top_in.map(function (it) { return moneyRow(it, 'up'); }).join('');
     document.getElementById('top-out').innerHTML = d.top_out.map(function (it) { return moneyRow(it, 'dn'); }).join('');
+    serverWatch = d.watch || [];
+    renderWatchList();
     renderLadder(d.ladder);
   }).catch(function () {
     document.getElementById('error').style.display = 'block';
@@ -68,7 +86,7 @@ function emFetch(hosts, path) {
       document.getElementById('stratMeta').innerHTML = '<b>综合评分策略</b>｜成交额前150 → 60日涨幅为正预筛 → 逐只K线算 趋势40+资金30+动量15+活跃15';
     }
   }).catch(function () {
-    document.getElementById('screen').innerHTML = '<tr><td colspan="5" style="text-align:left;color:#8b949e">选股榜数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('screen').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">选股榜数据生成中，稍后刷新。</td></tr>';
     document.getElementById('stratMeta').textContent = '策略数据生成中…';
   });
 
@@ -89,8 +107,9 @@ function emFetch(hosts, path) {
   function renderLadder(l) {
     var el = document.getElementById('ladder');
     if (!l) { el.innerHTML = '<p class="hint">暂无数据</p>'; return; }
+    ladderData = l;
     var maxB = l.groups && l.groups.length ? l.groups[0].boards : 1;
-    var html = '<p class="lsum">涨停 <b class="up">' + l.zt + '</b> 家 · 跌停 <b class="dn">' + l.dt
+    var html = '<p class="lsum">涨停 <b class="up lk" data-list="zt">' + l.zt + '</b> 家 · 跌停 <b class="dn lk" data-list="dt">' + l.dt
       + '</b> 家 · 最高 ' + maxB + ' 连板</p>';
     if (!l.groups || !l.groups.length) {
       html += '<p class="hint">今日无 2 连板以上股票。</p>';
@@ -104,12 +123,165 @@ function emFetch(hosts, path) {
     el.innerHTML = html;
   }
 
+  // ---------- 全市场名单（点概览/涨停跌停数字展开） ----------
+  var moversData = null, ladderData = null, curList = 'all', curPrefix = 'all', curRows = [], shownCount = 0;
+  var PAGE = 300;
+  var LIST_TITLES = { all: '全部股票（按涨幅排序）', up: '上涨股票（按涨幅排序）', down: '下跌股票（按跌幅排序）', flat: '平盘股票', zt: '今日涨停', dt: '今日跌停' };
+  function prefixOk(code) {
+    if (curPrefix === 'all') return true;
+    if (curPrefix === 'bj') return /^[98]/.test(code);
+    return code.indexOf(curPrefix) === 0;
+  }
+  function moverRow(x) {
+    return '<tr data-code="' + x.c + '"><td><span>' + x.n + '</span><span class="code">' + x.c + '</span></td>'
+      + '<td>' + (x.p === null || x.p === undefined ? '–' : Number(x.p).toFixed(2)) + '</td>'
+      + '<td>' + fmtPct(x.pc) + '</td>'
+      + '<td class="' + (x.mn > 0 ? 'up' : (x.mn < 0 ? 'dn' : '')) + '">' + (x.mn === null || x.mn === undefined ? '—' : fmtYi(x.mn)) + '</td></tr>';
+  }
+  function renderMovers() {
+    document.getElementById('moversBody').innerHTML = curRows.slice(0, shownCount).map(moverRow).join('');
+    document.getElementById('moversCount').textContent = '共 ' + curRows.length + ' 只，已显示 ' + Math.min(shownCount, curRows.length) + ' 只';
+    document.getElementById('moversMore').style.display = curRows.length > shownCount ? 'block' : 'none';
+  }
+  function applyList() {
+    var items;
+    if (curList === 'zt' || curList === 'dt') {
+      var src = (ladderData && ladderData[curList + '_list']) || [];
+      items = src.map(function (s) { return { c: s.code, n: s.name, p: null, pc: s.pct, mn: null }; });
+    } else {
+      items = (moversData || []).slice();
+      if (curList === 'up') items = items.filter(function (x) { return x.pc > 0; }).sort(function (a, b) { return b.pc - a.pc; });
+      else if (curList === 'down') items = items.filter(function (x) { return x.pc < 0; }).sort(function (a, b) { return a.pc - b.pc; });
+      else if (curList === 'flat') items = items.filter(function (x) { return x.pc === 0; }).sort(function (a, b) { return a.c < b.c ? -1 : 1; });
+      else items.sort(function (a, b) { return (b.pc || 0) - (a.pc || 0); });
+    }
+    curRows = items.filter(function (x) { return prefixOk(x.c); });
+    shownCount = PAGE;
+    document.getElementById('moversTitle').textContent = LIST_TITLES[curList] || '名单';
+    renderMovers();
+  }
+  function openList(kind) {
+    curList = kind;
+    var card = document.getElementById('moversCard');
+    card.style.display = 'block';
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if ((kind === 'zt' || kind === 'dt') || moversData) { applyList(); return; }
+    document.getElementById('moversBody').innerHTML = '<tr><td colspan="4" style="text-align:left;color:#8b949e">名单加载中…</td></tr>';
+    fetch('data/movers.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+      moversData = d.items || [];
+      applyList();
+    }).catch(function () {
+      document.getElementById('moversBody').innerHTML = '<tr><td colspan="4" style="text-align:left;color:#8b949e">名单加载失败，稍后重试。</td></tr>';
+    });
+  }
+  document.getElementById('moversChips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    curPrefix = b.getAttribute('data-p');
+    var chips = document.querySelectorAll('#moversChips .chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle('on', chips[i] === b);
+    applyList();
+  });
+  document.getElementById('moversMore').addEventListener('click', function () { shownCount += PAGE; renderMovers(); });
+
+  // ---------- 观察名单（面板本地编辑 + 同步） ----------
+  var serverWatch = [];
+  function watchCodes() {
+    try {
+      var v = JSON.parse(localStorage.getItem('qw_watch') || 'null');
+      if (Array.isArray(v)) return v;
+    } catch (e) {}
+    return serverWatch.map(function (x) { return x.code; });
+  }
+  function saveWatchCodes(codes) { try { localStorage.setItem('qw_watch', JSON.stringify(codes)); } catch (e) {} }
+  function withDel(rowHtml, code) {
+    return rowHtml.replace('</span></td>', '</span><span class="watch-del" data-code="' + code + '">×</span></td>');
+  }
+  function renderWatchList() {
+    var codes = watchCodes();
+    var tb = document.getElementById('watch');
+    if (!codes.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">名单是空的，在下面输入代码添加。</td></tr>'; return; }
+    tb.innerHTML = codes.map(function (code) {
+      var it = null;
+      for (var i = 0; i < serverWatch.length; i++) if (serverWatch[i].code === code) it = serverWatch[i];
+      if (it) return withDel(watchRow(it), code);
+      return '<tr data-code="' + code + '" id="w-' + code + '"><td><span>' + code + '</span><span class="code">加载中</span><span class="watch-del" data-code="' + code + '">×</span></td>'
+        + '<td class="concepts">—</td><td colspan="4" style="color:#8b949e">正在取实时数据…</td></tr>';
+    }).join('');
+    codes.forEach(function (code) {
+      var found = false;
+      for (var i = 0; i < serverWatch.length; i++) if (serverWatch[i].code === code) found = true;
+      if (!found) fillWatchRow(code);
+    });
+  }
+  function fillWatchRow(code) {
+    emFetch(PUSH_HOSTS, '/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f8,f9,f12,f14,f62&secids=' + secidOf(code))
+    .then(function (d) {
+      var diff = (d.data && d.data.diff) || {};
+      var rows = Array.isArray(diff) ? diff : Object.keys(diff).map(function (k) { return diff[k]; });
+      var el = document.getElementById('w-' + code);
+      if (!el || !rows.length) return;
+      var x = rows[0];
+      var it = { code: code, name: x.f14 || code, price: x.f2, pct: x.f3, main_net: x.f62, pe: x.f9, turnover: x.f8, concepts: null };
+      var tmp = document.createElement('tbody');
+      tmp.innerHTML = withDel(watchRow(it), code);
+      el.parentNode.replaceChild(tmp.firstChild, el);
+    }).catch(function () {});
+  }
+  function removeWatch(code) {
+    saveWatchCodes(watchCodes().filter(function (c) { return c !== code; }));
+    renderWatchList();
+  }
+  document.getElementById('watchAdd').addEventListener('click', function () {
+    var inp = document.getElementById('watchInput');
+    var code = (inp.value || '').trim();
+    if (!/^\d{6}$/.test(code)) { inp.value = ''; inp.placeholder = '代码要是6位数字'; return; }
+    var codes = watchCodes();
+    if (codes.indexOf(code) < 0) { codes.push(code); saveWatchCodes(codes); }
+    inp.value = '';
+    renderWatchList();
+  });
+  document.getElementById('watchReset').addEventListener('click', function () {
+    try { localStorage.removeItem('qw_watch'); } catch (e) {}
+    renderWatchList();
+  });
+  document.getElementById('watchSync').addEventListener('click', function () {
+    var btn = this;
+    var pw = '';
+    try { pw = localStorage.getItem('qw_watch_pw') || ''; } catch (e) {}
+    if (!pw) {
+      pw = window.prompt('输入同步口令（就是你在 Cloudflare 里设的那个 WATCH_PASSWORD）：') || '';
+      if (!pw) return;
+    }
+    btn.textContent = '同步中…';
+    fetch('/api/watchlist', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw, codes: watchCodes() })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+    .then(function (res) {
+      if (res.ok) {
+        try { localStorage.setItem('qw_watch_pw', pw); } catch (e) {}
+        btn.textContent = '已同步 ✓ 明天起按新名单更新';
+      } else {
+        try { localStorage.removeItem('qw_watch_pw'); } catch (e) {}
+        btn.textContent = '同步失败：' + (res.j.error || '口令不对或接口没配好');
+      }
+      setTimeout(function () { btn.textContent = '同步名单'; }, 4000);
+    }).catch(function () {
+      btn.textContent = '同步失败：接口还没上线或没配密钥';
+      setTimeout(function () { btn.textContent = '同步名单'; }, 4000);
+    });
+  });
+
   // ---------- 个股详情 ----------
   var detail = document.getElementById('detail');
   document.getElementById('closeDetail').onclick = function () { detail.style.display = 'none'; };
   detail.addEventListener('click', function (e) { if (e.target === detail) detail.style.display = 'none'; });
   document.body.addEventListener('click', function (e) {
     if (!e.target.closest) return;
+    var del = e.target.closest('.watch-del');
+    if (del) { removeWatch(del.getAttribute('data-code')); return; }
+    var lk = e.target.closest('[data-list]');
+    if (lk) { openList(lk.getAttribute('data-list')); return; }
     var tr = e.target.closest('tr[data-code]');
     if (tr) { openDetail(tr.getAttribute('data-code'), tr.querySelector('td span').textContent); return; }
     var chip = e.target.closest('.s[data-code]');
