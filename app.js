@@ -45,7 +45,7 @@ function emFetch(hosts, path) {
       + '<td class="score">' + it.score + '</td></tr>';
   };
 
-  fetch('data/latest.json').then(function (r) { return r.json(); }).then(function (d) {
+  fetch('data/latest.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     document.getElementById('date').textContent = d.date;
     document.getElementById('total').textContent = d.total;
     document.getElementById('up').textContent = d.up;
@@ -59,7 +59,7 @@ function emFetch(hosts, path) {
     document.getElementById('date').textContent = '暂无';
   });
 
-  fetch('data/screen.json').then(function (r) { return r.json(); }).then(function (d) {
+  fetch('data/screen.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     document.getElementById('screen').innerHTML = d.items.map(screenRow).join('');
     if (d.meta) {
       document.getElementById('stratMeta').innerHTML = '<b>' + d.meta.name + '</b>｜' + d.meta.rule
