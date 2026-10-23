@@ -22,6 +22,120 @@ def _get_json(url, hosts=None):
         return json.loads(r.read().decode('utf-8'))
 
 
+
+def _interp(x, anchors):
+    if x <= anchors[0][0]:
+        return anchors[0][1]
+    if x >= anchors[-1][0]:
+        return anchors[-1][1]
+    for (x0, y0), (x1, y1) in zip(anchors, anchors[1:]):
+        if x0 <= x <= x1:
+            return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    return anchors[-1][1]
+
+
+_POSITION_REF = {
+    '高潮': '两极分化：减仓兑现（心法第46/58条）',
+    '主升': '主升期重仓，去弱留强、仓位向龙头集中（心法第46/58条）',
+    '启动': '新周期启动：半仓到七八成（心法第58条）',
+    '混沌': '混沌期不超过三四成（心法第58条）',
+    '低迷': '弱市少做：不超过一两成（心法第39/58条）',
+    '退潮': '退潮防御：降到一成或空仓（心法第51/52/53条）',
+    '冰点': '冰点控仓，寻找新猎物（心法第46条）',
+}
+
+
+def _load_xinfa():
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'xinfa_lines.json')
+    try:
+        return json.load(open(p, encoding='utf-8'))
+    except Exception:
+        return []
+
+
+def compute_sentiment(conn, day, ladder, total, up, state_path):
+    """情绪周期（按游资心法口径机械计算）：涨停热度25+连板高度20+赚钱效应30+市场广度25，
+    跌停压力最多扣20。赚钱效应=昨日涨停股今日平均涨幅，靠 sentiment_state.json 跨日积累。"""
+    import datetime as _dt
+    zt = ladder.get('zt') or 0
+    dt = ladder.get('dt') or 0
+    zt_list = ladder.get('zt_list') or []
+    max_boards = max([z.get('boards') or 1 for z in zt_list], default=0)
+    lianban = sum(1 for z in zt_list if (z.get('boards') or 1) >= 2)
+    effect = None
+    leader = None
+    retreat = None
+    try:
+        st = json.load(open(state_path, encoding='utf-8'))
+    except Exception:
+        st = None
+    if st and st.get('date') and st['date'] < day and st.get('zt'):
+        prev = st['zt']
+        codes = [z['code'] for z in prev]
+        q = ','.join('?' * len(codes))
+        rows = dict(conn.execute(
+            'SELECT code, pct_chg FROM daily_bar WHERE date=? AND code IN (%s)' % q,
+            [day] + codes).fetchall())
+        pcts = [rows[c] for c in codes if c in rows and rows[c] is not None]
+        if pcts:
+            avg = sum(pcts) / len(pcts)
+            red = sum(1 for p in pcts if p > 0) / len(pcts)
+            pmax = max(z.get('boards') or 1 for z in prev)
+            lead_codes = [z['code'] for z in prev if (z.get('boards') or 1) == pmax]
+            lead_pct = rows.get(lead_codes[0]) if lead_codes else None
+            m = conn.execute('SELECT name FROM stock_meta WHERE code=?',
+                             (lead_codes[0],)).fetchone() if lead_codes else None
+            leader = {'code': lead_codes[0], 'name': (m[0] if m else lead_codes[0]),
+                      'boards': pmax, 'pct': lead_pct}
+            effect = {'n': len(pcts), 'avg_pct': round(avg, 2), 'red_ratio': round(red, 3)}
+            if lead_pct is not None and lead_pct <= -9:
+                retreat = '昨日总龙头 %s 今日 %.2f%%（核按钮，心法第51条）' % (leader['name'], lead_pct)
+            elif avg <= -3 and dt >= max(10, zt // 2):
+                retreat = '昨日涨停股今日平均 %.2f%%，亏钱效应扩散' % avg
+    p_zt = round(min(25, zt * 25 / 90))
+    p_bd = round(min(20, max_boards * 20 / 8))
+    p_br = round(min(25, (up / total) * 25 / 0.7)) if total else 0
+    p_ef = round(_interp(effect['avg_pct'],
+                         [(-3, 0), (-2, 5), (-1, 9), (0, 14), (1, 19), (2, 24), (4, 30)])) if effect else None
+    pen = round(min(20, dt * 20 / 40))
+    got = p_zt + p_bd + p_br - pen + (p_ef or 0)
+    mx = 75 + (30 if effect else 0)
+    score = max(0, min(100, round(got / mx * 100))) if mx else 0
+    if retreat:
+        stage = '退潮'
+    elif score >= 80:
+        stage = '高潮'
+    elif score >= 65:
+        stage = '主升'
+    elif score >= 50:
+        stage = '启动'
+    elif score >= 35:
+        stage = '混沌'
+    elif score >= 20:
+        stage = '低迷'
+    else:
+        stage = '冰点'
+    lines = _load_xinfa()
+    xinfa = lines[_dt.date.fromisoformat(day).toordinal() % len(lines)] if lines else None
+    sent = {'score': score, 'stage': stage,
+            'parts': {'zt': p_zt, 'boards': p_bd, 'effect': p_ef, 'breadth': p_br, 'dt_penalty': -pen},
+            'facts': {'zt': zt, 'dt': dt, 'max_boards': max_boards, 'lianban': lianban,
+                      'effect_avg': effect['avg_pct'] if effect else None,
+                      'effect_red': effect['red_ratio'] if effect else None,
+                      'leader': leader},
+            'retreat': retreat,
+            'position_ref': _POSITION_REF.get(stage, ''),
+            'xinfa': xinfa}
+    try:
+        with open(state_path, 'w', encoding='utf-8') as f:
+            json.dump({'date': day,
+                       'zt': [{'code': z['code'], 'boards': z.get('boards') or 1} for z in zt_list]},
+                      f, ensure_ascii=False)
+    except Exception as e:
+        print('情绪状态保存失败：%s' % e)
+    return sent
+
+
 def fetch_ladder(day):
     """涨停/跌停池 + 连板梯队（按连板数分组，取 >=2 板）。day: YYYY-MM-DD"""
     d8 = day.replace('-', '')
@@ -125,6 +239,88 @@ def fetch_watch(conn, day):
     return out
 
 
+def _board_of(code, name):
+    """按代码前缀分板块并给出涨停幅度（%）：创业板 30 开头是 20cm，单独识别。"""
+    if code.startswith('30'):
+        return '创业板', 20.0
+    if code.startswith('68'):
+        return '科创板', 20.0
+    if code.startswith('4') or code.startswith('8') or code.startswith('920'):
+        return '北交所', 30.0
+    if 'ST' in (name or '').upper():
+        return '主板', 5.0
+    return '主板', 10.0
+
+
+def compute_radar(conn, day):
+    """全市场雷达（Excel finally.xls 雷达的网页版，数据源换成 quant.db）：
+    扫最新一日全市场，满足任一信号即入榜——
+      逼近涨停：涨幅 >= 涨停幅-0.5（主板 9.5 / 创业板·科创板 19 / 北交所 29，ST 主板 4.5）
+      涨幅达标：主板 >=5%、创业板/科创板 >=10%、北交所 >=15%
+      放量上涨：量比 >=2 且涨幅为正
+      主力抢筹：主力净流入居全市场前 30 且涨幅为正
+    量比口径：当日成交量 / 近 5 个交易日（不含当日）平均成交量。东财量比的分母是
+    近 5 日每分钟均量折算值，盘后用日量均值近似，量级可比、数值不完全等同；
+    历史不足 5 日的股票量比为空，只能靠涨幅/资金信号入榜。
+    排序按信号强度：逼近涨停 > 涨幅达标 > 放量上涨 > 主力抢筹，同级按涨幅降序。
+    总量 <=50 条；创业板（30 开头）单独保名额：当日触发信号的全部列入（上限 30）。"""
+    rows = conn.execute(
+        """SELECT b.code, m.name, b.pct_chg, b.volume, b.turnover, f.main_net
+           FROM daily_bar b
+           LEFT JOIN stock_meta m ON b.code = m.code
+           LEFT JOIN fund_flow_daily f ON b.code = f.code AND f.date = b.date
+           WHERE b.date = ? AND b.pct_chg IS NOT NULL""", (day,)).fetchall()
+    top_money = {r[0] for r in conn.execute(
+        """SELECT code FROM fund_flow_daily
+           WHERE date = ? AND main_net > 0 ORDER BY main_net DESC LIMIT 30""", (day,))}
+    gain_thr = {5.0: 5.0, 10.0: 5.0, 20.0: 10.0, 30.0: 15.0}
+    hits = []
+    for code, name, pct, vol, turnover, net in rows:
+        name = name or code
+        board, lim = _board_of(code, name)
+        near = pct >= lim - 0.5
+        gain = pct >= gain_thr[lim]
+        vr = None
+        if pct > 0:
+            prev = [r[0] for r in conn.execute(
+                """SELECT volume FROM daily_bar
+                   WHERE code = ? AND date < ? AND volume > 0
+                   ORDER BY date DESC LIMIT 5""", (code, day))]
+            if prev and vol:
+                vr = vol / (sum(prev) / len(prev))
+        vol_sig = vr is not None and vr >= 2 and pct > 0
+        money_sig = code in top_money and pct > 0
+        if not (near or gain or vol_sig or money_sig):
+            continue
+        signals = []
+        if near:
+            signals.append('逼近涨停')
+        if gain:
+            signals.append('涨幅达标')
+        if vol_sig:
+            signals.append('放量上涨')
+        if money_sig:
+            signals.append('主力抢筹')
+        hits.append({'code': code, 'name': name, 'board': board,
+                     'pct': round(pct, 2),
+                     'vol_ratio': round(vr, 2) if vr is not None else None,
+                     'main_net': int(net) if net is not None else None,
+                     'turnover': round(turnover, 2) if turnover is not None else None,
+                     'signals': signals, 'near_limit': bool(near)})
+
+    def strength(r):
+        grp = 0 if r['near_limit'] else (1 if '涨幅达标' in r['signals']
+              else (2 if '放量上涨' in r['signals'] else 3))
+        return (grp, -r['pct'])
+
+    hits.sort(key=strength)
+    gem = [r for r in hits if r['board'] == '创业板'][:30]
+    gem_codes = {r['code'] for r in gem}
+    rest = [r for r in hits if r['code'] not in gem_codes]
+    lst = sorted(gem + rest[:max(0, 50 - len(gem))], key=strength)[:50]
+    return {'date': day, 'list': lst, 'gem_list': gem}
+
+
 def pick_date(conn, arg):
     if arg:
         return arg
@@ -161,10 +357,14 @@ def main():
                         'main_net': int(net)})
         return out
 
+    ladder = fetch_ladder(day)
+    state_path = os.path.join(os.path.dirname(os.path.abspath(args.db)), 'sentiment_state.json')
     payload = {'date': day, 'total': total, 'up': up, 'down': down, 'flat': flat,
                'top_in': top('DESC'), 'top_out': top('ASC'),
-               'ladder': fetch_ladder(day),
+               'ladder': ladder,
+               'sentiment': compute_sentiment(conn, day, ladder, total, up, state_path),
                'watch': fetch_watch(conn, day)}
+    radar = compute_radar(conn, day)
     conn.close()
 
     # 给榜单每只股附上影响其涨跌的相关题材（概念/行业，取同向最强/最弱 2 个）
@@ -177,6 +377,11 @@ def main():
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(payload, f, ensure_ascii=False)
     print('已生成 %s：%s 共 %d 只，上涨 %d，下跌 %d，平盘 %d' % (path, day, total, up, down, flat))
+
+    rpath = os.path.join(args.out, 'radar.json')
+    with open(rpath, 'w', encoding='utf-8') as f:
+        json.dump(radar, f, ensure_ascii=False)
+    print('已生成 %s：雷达 %d 条（创业板 %d 条）' % (rpath, len(radar['list']), len(radar['gem_list'])))
 
     # 全市场当日名单（供看板点概览数字看涨/跌/平全名单，按代码前缀筛选）
     conn2 = sqlite3.connect(args.db)
