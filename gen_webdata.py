@@ -321,6 +321,144 @@ def compute_radar(conn, day):
     return {'date': day, 'list': lst, 'gem_list': gem}
 
 
+_OVERSOLD_WARMUP = 30    # 与回测一致：DMA 预热 30 个交易日后才出信号
+_OVERSOLD_MIN_HIST = 40  # 样本门槛：历史 >=40 个交易日
+
+
+def _oversold_signals(rows):
+    """复刻回测脚本 backtest_gaoyuan.py 的 compute_signals 口径（通达信语义、全程因果）：
+    返回 (A, C, dma) 三个与 rows 等长的序列——
+    A = 甲 AND 乙；甲：收盘低于量加权成本线 DMA(典型价, VOL/近13日量近似) 17% 以上；
+        乙：(C - MIN(REF(C,5)*0.83, REF(C,21)*0.72))/C < 0.05（近5日跌17%/近21日跌28% 后贴近极值）；
+    C = A AND 丙（磨底）：CAPITAL 由换手率反推（流通股本 = 成交量/(换手率/100)，
+        回测已用茅台校验），最近 8 日内「贴换手周期低点」（收盘为过去一个换手周期内最低收盘）天数 > 3。
+    rows: [(date, open, high, low, close, volume, amount, turnover), ...] 按日期升序。"""
+    n = len(rows)
+    O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]
+    C = [r[4] for r in rows]; V = [r[5] for r in rows]; AMT = [r[6] for r in rows]
+    TO = [r[7] for r in rows]
+    X = [(O[i] + H[i] + L[i] + C[i]) / 4.0 for i in range(n)]
+
+    dma = [None] * n
+    amt13 = 0.0
+    y = None
+    for i in range(n):
+        amt13 += AMT[i]
+        if i >= 13:
+            amt13 -= AMT[i - 13]
+        if i >= 12 and V[i] and AMT[i]:
+            avg_price = AMT[i] / V[i]              # 元/股
+            nsyj6 = amt13 / avg_price              # 近13日成交量（股，当日均价折算）
+            a = V[i] / nsyj6 if nsyj6 > 0 else 0.0
+            a = min(max(a, 0.0), 1.0)
+            y = X[i] if y is None else a * X[i] + (1 - a) * y
+            dma[i] = y
+        elif y is not None:
+            dma[i] = y
+
+    at_low = [False] * n
+    for i in range(n):
+        if not TO[i] or TO[i] <= 0 or not V[i]:
+            continue
+        capital = V[i] / (TO[i] / 100.0)           # 流通股本（股）
+        s, k = 0.0, 0
+        while i - k >= 0 and s < capital:
+            s += V[i - k]; k += 1
+        if s < capital:
+            continue                               # 历史不足，NSYJ2 不可判
+        win = C[i - k + 1:i + 1]
+        at_low[i] = C[i] <= min(win)
+
+    A = [False] * n
+    Cc = [False] * n
+    for i in range(n):
+        if i < _OVERSOLD_WARMUP or dma[i] is None or i < 21:
+            continue
+        jia = (C[i] - dma[i]) / dma[i] * 100.0 < -17.0
+        if not jia:
+            continue
+        yi = (C[i] - min(C[i - 5] * 0.83, C[i - 21] * 0.72)) / C[i] < 0.05
+        if not yi:
+            continue
+        A[i] = True
+        Cc[i] = sum(1 for j in range(max(0, i - 7), i + 1) if at_low[j]) > 3
+    return A, Cc, dma
+
+
+def compute_oversold(conn, day):
+    """超跌观察名单（「高远综合抄底」原公式全条件 = 回测变体C，仅作观察标记，不进选股评分）。
+    事件 = 甲&乙&丙 首次触发（前一日不成立）后 5 个交易日内首次收阳（C>O）确认，以确认日为信号日；
+    同一股票 20 个交易日内重复事件只记第一次（与回测去重口径一致）。
+    返回「当日处于确认状态」的名单：确认日在最近 5 个交易日内（确认后未超过 5 个交易日，
+    按该股自身交易日序列计）。纯 quant.db 计算，不依赖任何外部接口；
+    样本为历史 >=40 个交易日、且当日有行情的股票，日期 <= day。"""
+    codes = [r[0] for r in conn.execute(
+        'SELECT code FROM daily_bar WHERE date<=? GROUP BY code HAVING COUNT(*)>=?',
+        (day, _OVERSOLD_MIN_HIST))]
+    names = dict(conn.execute('SELECT code, name FROM stock_meta').fetchall())
+    out = []
+    for code in codes:
+        rows = conn.execute(
+            'SELECT date,open,high,low,close,volume,amount,turnover,pct_chg FROM daily_bar '
+            'WHERE code=? AND date<=? ORDER BY date', (code, day)).fetchall()
+        if not rows or rows[-1][0] != day:
+            continue                               # 当日无行情（停牌等），无当日涨幅可报
+        idx_day = len(rows) - 1
+        _, Cc, dma = _oversold_signals([(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]) for r in rows])
+        # 首次触发 -> 5 个交易日内阳线确认（复刻回测 first_triggers + confirm_events）
+        pairs = []                                 # (confirm_idx, trigger_idx)
+        for f in range(_OVERSOLD_WARMUP + 1, len(rows)):
+            if Cc[f] and not Cc[f - 1]:
+                for j in range(f, min(f + 5, len(rows))):
+                    if rows[j][4] > rows[j][1]:    # C > O 收阳
+                        pairs.append((j, f))
+                        break
+        pairs.sort()
+        kept = []
+        for j, f in pairs:                         # 去重：同股 20 个交易日内只计第一次
+            if not kept or j - kept[-1][0] >= 20:
+                kept.append((j, f))
+        for j, f in kept:
+            if 0 <= idx_day - j <= 5:              # 确认后未超过 5 个交易日，仍在观察窗
+                name = names.get(code) or code
+                board, _lim = _board_of(code, name)
+                c_day = rows[idx_day][4]
+                dev = (c_day - dma[idx_day]) / dma[idx_day] * 100.0 if dma[idx_day] else None
+                base21 = rows[idx_day - 21][4] if idx_day >= 21 else None
+                ret21 = (c_day / base21 - 1) * 100.0 if base21 else None
+                pct = rows[idx_day][8]
+                out.append({'code': code, 'name': name, 'board': board,
+                            'pct': round(pct, 2) if pct is not None else None,
+                            'dev_cost': round(dev, 2) if dev is not None else None,
+                            'ret21': round(ret21, 2) if ret21 is not None else None,
+                            'signal_date': rows[f][0], 'confirm_date': rows[j][0]})
+                break
+    out.sort(key=lambda r: r['confirm_date'], reverse=True)
+    return out[:30]
+
+
+def _log_oversold(day, items):
+    """当日超跌观察名单追加留底到本地文件（同一日期只记一次），为将来攒够样本复测备查；
+    该文件只在本机，不进公开仓库。"""
+    path = os.path.expanduser('~/workspace/goals/goal-5/hidden_files/oversold_log.jsonl')
+    try:
+        if os.path.exists(path):
+            with open(path, encoding='utf-8') as f:
+                for line in f:
+                    try:
+                        if json.loads(line).get('date') == day:
+                            print('超跌观察留底：%s 已记录，跳过' % day)
+                            return
+                    except Exception:
+                        continue
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'a', encoding='utf-8') as f:
+            f.write(json.dumps({'date': day, 'items': items}, ensure_ascii=False) + '\n')
+        print('超跌观察留底：已记入 %s（%s，%d 条）' % (path, day, len(items)))
+    except Exception as e:
+        print('超跌观察留底失败：%s' % e)
+
+
 def pick_date(conn, arg):
     if arg:
         return arg
@@ -365,6 +503,8 @@ def main():
                'sentiment': compute_sentiment(conn, day, ladder, total, up, state_path),
                'watch': fetch_watch(conn, day)}
     radar = compute_radar(conn, day)
+    radar['oversold'] = compute_oversold(conn, day)
+    _log_oversold(day, radar['oversold'])
     conn.close()
 
     # 给榜单每只股附上影响其涨跌的相关题材（概念/行业，取同向最强/最弱 2 个）
@@ -381,7 +521,7 @@ def main():
     rpath = os.path.join(args.out, 'radar.json')
     with open(rpath, 'w', encoding='utf-8') as f:
         json.dump(radar, f, ensure_ascii=False)
-    print('已生成 %s：雷达 %d 条（创业板 %d 条）' % (rpath, len(radar['list']), len(radar['gem_list'])))
+    print('已生成 %s：雷达 %d 条（创业板 %d 条），超跌观察 %d 条' % (rpath, len(radar['list']), len(radar['gem_list']), len(radar.get('oversold') or [])))
 
     # 全市场当日名单（供看板点概览数字看涨/跌/平全名单，按代码前缀筛选）
     conn2 = sqlite3.connect(args.db)
