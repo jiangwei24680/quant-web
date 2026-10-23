@@ -99,9 +99,39 @@ function emFetch(hosts, path) {
       + '<td>' + (it.confirm_date ? it.confirm_date.slice(5) : '—') + '</td></tr>';
   };
   var oversoldEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
+  var radarData = null;
+  var radarFilter = '';
+  var radarSigOrder = ['逼近涨停', '涨幅达标', '放量上涨', '主力抢筹'];
+  var renderRadar = function () {
+    if (!radarData) return;
+    var all = radarData.list || [];
+    var counts = {};
+    all.forEach(function (it) { (it.signals || []).forEach(function (s) { counts[s] = (counts[s] || 0) + 1; }); });
+    var sigs = radarSigOrder.filter(function (s) { return counts[s]; });
+    Object.keys(counts).forEach(function (s) { if (sigs.indexOf(s) < 0) sigs.push(s); });
+    var chipHtml = '<button class="chip' + (radarFilter ? '' : ' on') + '" data-sig="">全部</button>';
+    sigs.forEach(function (s) {
+      chipHtml += '<button class="chip' + (radarFilter === s ? ' on' : '') + '" data-sig="' + s + '">' + s + ' · ' + counts[s] + '</button>';
+    });
+    document.getElementById('radarChips').innerHTML = chipHtml;
+    var hit = function (it) { return !radarFilter || (it.signals || []).indexOf(radarFilter) >= 0; };
+    var emptyRow = radarFilter
+      ? '<tr><td colspan="6" style="text-align:left;color:#8b949e">「' + radarFilter + '」信号下暂无股票。</td></tr>'
+      : radarEmpty;
+    var gem = (radarData.gem_list || []).filter(hit);
+    var lst = all.filter(hit);
+    document.getElementById('radarGem').innerHTML = gem.length ? gem.map(radarRow).join('') : emptyRow;
+    document.getElementById('radarAll').innerHTML = lst.length ? lst.map(radarRow).join('') : emptyRow;
+  };
+  document.getElementById('radarChips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    var s = b.getAttribute('data-sig');
+    radarFilter = (s && s !== radarFilter) ? s : '';
+    renderRadar();
+  });
   fetch('data/radar.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
-    document.getElementById('radarGem').innerHTML = (d.gem_list && d.gem_list.length) ? d.gem_list.map(radarRow).join('') : radarEmpty;
-    document.getElementById('radarAll').innerHTML = (d.list && d.list.length) ? d.list.map(radarRow).join('') : radarEmpty;
+    radarData = d;
+    renderRadar();
     document.getElementById('radarOversold').innerHTML = (d.oversold && d.oversold.length) ? d.oversold.map(oversoldRow).join('') : oversoldEmpty;
   }).catch(function () {
     document.getElementById('radarGem').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
