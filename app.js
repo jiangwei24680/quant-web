@@ -78,6 +78,26 @@ function emFetch(hosts, path) {
     document.getElementById('date').textContent = '暂无';
   });
 
+  var radarRow = function (it) {
+    var sig = (it.signals || []).join(' · ');
+    if (it.near_limit) sig += '<span class="limtag">逼近涨停</span>';
+    return '<tr data-code="' + it.code + '"' + (it.near_limit ? ' class="limit"' : '') + '><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + fmtPct(it.pct) + '</td>'
+      + '<td>' + (typeof it.vol_ratio === 'number' ? it.vol_ratio.toFixed(2) : '—') + '</td>'
+      + '<td class="' + (it.main_net > 0 ? 'up' : (it.main_net < 0 ? 'dn' : '')) + '">'
+      + (it.main_net === null || it.main_net === undefined ? '—' : fmtYi(it.main_net)) + '</td>'
+      + '<td>' + (typeof it.turnover === 'number' ? it.turnover.toFixed(2) + '%' : '—') + '</td>'
+      + '<td class="sig">' + sig + '</td></tr>';
+  };
+  var radarEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发信号的股票。</td></tr>';
+  fetch('data/radar.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+    document.getElementById('radarGem').innerHTML = (d.gem_list && d.gem_list.length) ? d.gem_list.map(radarRow).join('') : radarEmpty;
+    document.getElementById('radarAll').innerHTML = (d.list && d.list.length) ? d.list.map(radarRow).join('') : radarEmpty;
+  }).catch(function () {
+    document.getElementById('radarGem').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('radarAll').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+  });
+
   fetch('data/screen.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     document.getElementById('screen').innerHTML = d.items.map(screenRow).join('');
     if (d.meta) {
