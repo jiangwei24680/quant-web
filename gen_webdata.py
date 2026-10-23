@@ -338,6 +338,8 @@ def _oversold_signals(rows):
     C = [r[4] for r in rows]; V = [r[5] for r in rows]; AMT = [r[6] for r in rows]
     TO = [r[7] for r in rows]
     X = [(O[i] + H[i] + L[i] + C[i]) / 4.0 for i in range(n)]
+    # 新浪/腾讯回填的历史行 amount 可能为 NULL：用 量×典型价 近似补齐，避免 DMA 累加时崩溃
+    AMT = [AMT[i] if AMT[i] is not None else (V[i] or 0) * X[i] for i in range(n)]
 
     dma = [None] * n
     amt13 = 0.0
@@ -497,7 +499,10 @@ def main():
 
     ladder = fetch_ladder(day)
     state_path = os.path.join(os.path.dirname(os.path.abspath(args.db)), 'sentiment_state.json')
+    # 当日资金流覆盖数：为 0 时说明 em_fundflow 未跑/失败，资金榜降级为空——在 latest.json 里留标记可辨
+    ff_n = conn.execute('SELECT COUNT(*) FROM fund_flow_daily WHERE date=?', (day,)).fetchone()[0]
     payload = {'date': day, 'total': total, 'up': up, 'down': down, 'flat': flat,
+               'fund_flow': {'stocks': ff_n},
                'top_in': top('DESC'), 'top_out': top('ASC'),
                'ladder': ladder,
                'sentiment': compute_sentiment(conn, day, ladder, total, up, state_path),
