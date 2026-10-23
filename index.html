@@ -79,6 +79,14 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
 .posref{font-size:13px;margin-top:6px}
 .xinfa{margin-top:10px;background:#0d1117;border:1px solid var(--border);border-left:3px solid #1f6feb;border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.75;color:#c9d1d9}
 .xinfa a{color:#58a6ff}
+.radarSub{font-size:13px;margin:14px 0 4px;color:#c9d1d9}
+#radarCard th{text-align:right}
+#radarCard th:first-child{text-align:left}
+#radarCard td{text-align:right}
+#radarCard td:first-child{text-align:left}
+#radarCard tr.limit td{background:rgba(248,81,73,.14)}
+.limtag{display:inline-block;background:#f85149;color:#fff;border-radius:6px;padding:0 6px;font-size:10px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+td.sig{font-size:11px;color:#d29922;line-height:1.5}
 
 </style>
 </head>
@@ -105,6 +113,17 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
 <section class="card" id="sentCard">
   <h2>情绪周期<span class="sub">按游资心法口径 · 数据说话</span></h2>
   <div id="sentiment"><p class="hint">加载中…</p></div>
+</section>
+
+<section class="card" id="radarCard">
+  <h2>全市场雷达<span class="sub">强势异动扫描</span></h2>
+  <div class="radarSub">创业板 30 · 20cm 专区</div>
+  <table><thead><tr><th>股票</th><th>涨幅</th><th>量比</th><th>净流入(亿)</th><th>换手</th><th>信号</th></tr></thead>
+  <tbody id="radarGem"><tr><td colspan="6" style="text-align:left;color:#8b949e">加载中…</td></tr></tbody></table>
+  <div class="radarSub">全市场</div>
+  <table><thead><tr><th>股票</th><th>涨幅</th><th>量比</th><th>净流入(亿)</th><th>换手</th><th>信号</th></tr></thead>
+  <tbody id="radarAll"><tr><td colspan="6" style="text-align:left;color:#8b949e">加载中…</td></tr></tbody></table>
+  <p class="hint">信号口径：逼近涨停（主板 ≥9.5%、创业板/科创板 ≥19%、北交所 ≥29%）、涨幅达标（主板 ≥5%、创业板/科创板 ≥10%、北交所 ≥15%）、放量上涨（量比 ≥2 且上涨；量比 = 当日量 ÷ 近5日均量）、主力抢筹（主力净流入全市场前 30 且上涨）。点任意股票查看 60 日 K 线和今日分时。</p>
 </section>
 
 <section class="card" id="moversCard" style="display:none">
@@ -171,6 +190,6 @@ td.risk{font-size:11px;color:var(--dim);line-height:1.5;white-space:nowrap}
   </div>
 </div>
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
