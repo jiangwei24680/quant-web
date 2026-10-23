@@ -90,12 +90,23 @@ function emFetch(hosts, path) {
       + '<td class="sig">' + sig + '</td></tr>';
   };
   var radarEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发信号的股票。</td></tr>';
+  var oversoldRow = function (it) {
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + fmtPct(it.pct) + '</td>'
+      + '<td>' + fmtPct(it.dev_cost) + '</td>'
+      + '<td>' + fmtPct(it.ret21) + '</td>'
+      + '<td>' + (it.signal_date ? it.signal_date.slice(5) : '—') + '</td>'
+      + '<td>' + (it.confirm_date ? it.confirm_date.slice(5) : '—') + '</td></tr>';
+  };
+  var oversoldEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
   fetch('data/radar.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     document.getElementById('radarGem').innerHTML = (d.gem_list && d.gem_list.length) ? d.gem_list.map(radarRow).join('') : radarEmpty;
     document.getElementById('radarAll').innerHTML = (d.list && d.list.length) ? d.list.map(radarRow).join('') : radarEmpty;
+    document.getElementById('radarOversold').innerHTML = (d.oversold && d.oversold.length) ? d.oversold.map(oversoldRow).join('') : oversoldEmpty;
   }).catch(function () {
     document.getElementById('radarGem').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('radarAll').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('radarOversold').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
   });
 
   fetch('data/screen.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
