@@ -63,6 +63,7 @@ function emFetch(hosts, path) {
 
   fetch('data/latest.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     document.getElementById('date').textContent = d.date;
+    document.getElementById('updatedAt').textContent = d.updated_at ? '（盘中更新 ' + d.updated_at + ')' : '';
     document.getElementById('total').textContent = d.total;
     document.getElementById('up').textContent = d.up;
     document.getElementById('down').textContent = d.down;
