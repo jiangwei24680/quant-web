@@ -99,6 +99,22 @@ function emFetch(hosts, path) {
       + '<td>' + (it.confirm_date ? it.confirm_date.slice(5) : '—') + '</td></tr>';
   };
   var oversoldEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
+  var fwdEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
+  var forwardPreRow = function (it) {
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + it.price + '</td><td>' + fmtPct(it.pct) + '</td>'
+      + '<td>' + fmtPct(it.amp) + '</td><td>' + it.vratio + '</td><td>' + fmtPct(it.ret20) + '</td></tr>';
+  };
+  var forwardPullRow = function (it) {
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + it.price + '</td><td>' + fmtPct(it.pct) + '</td>'
+      + '<td>' + fmtPct(it.ret60) + '</td><td>' + fmtPct(it.near) + '</td><td>' + it.vshr + '</td></tr>';
+  };
+  var forwardFundRow = function (it) {
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + it.price + '</td><td>' + fmtPct(it.pct) + '</td>'
+      + '<td>' + fmtPct(it.ret5) + '</td><td>' + fmtYi(it.fund3) + '</td><td>' + (it.fund_date ? it.fund_date.slice(5) : '—') + '</td></tr>';
+  };
   var radarData = null;
   var radarFilter = '';
   var radarSigOrder = ['逼近涨停', '涨幅达标', '放量上涨', '主力抢筹'];
@@ -133,10 +149,17 @@ function emFetch(hosts, path) {
     radarData = d;
     renderRadar();
     document.getElementById('radarOversold').innerHTML = (d.oversold && d.oversold.length) ? d.oversold.map(oversoldRow).join('') : oversoldEmpty;
+    var fw = d.forward || {};
+    document.getElementById('forwardPre').innerHTML = (fw.pre && fw.pre.length) ? fw.pre.map(forwardPreRow).join('') : fwdEmpty;
+    document.getElementById('forwardPull').innerHTML = (fw.pull && fw.pull.length) ? fw.pull.map(forwardPullRow).join('') : fwdEmpty;
+    document.getElementById('forwardFund').innerHTML = (fw.fund && fw.fund.length) ? fw.fund.map(forwardFundRow).join('') : fwdEmpty;
   }).catch(function () {
     document.getElementById('radarGem').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('radarAll').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('radarOversold').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('forwardPre').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('forwardPull').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('forwardFund').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
   });
 
   fetch('data/screen.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
