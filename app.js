@@ -176,6 +176,20 @@ function emFetch(hosts, path) {
     document.getElementById('stratMeta').textContent = '策略数据生成中…';
   });
 
+  fetch('data/screen_by_market.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+    var m = d.markets || {};
+    if (m['00']) document.getElementById('screen00').innerHTML = m['00'].items.map(screenRow).join('');
+    if (m['30']) document.getElementById('screen30').innerHTML = m['30'].items.map(screenRow).join('');
+    if (m['60']) document.getElementById('screen60').innerHTML = m['60'].items.map(screenRow).join('');
+    document.getElementById('marketMeta').innerHTML = '<b>分市场综合评分</b>｜' + (d.rule || '')
+      + '｜数据日期 ' + d.date + '，资金流' + (d.fund_flow === d.date ? '正常' : '缺失（资金项为 0）');
+  }).catch(function () {
+    ['screen00', 'screen30', 'screen60'].forEach(function (id) {
+      document.getElementById(id).innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">分市场榜数据生成中，稍后刷新。</td></tr>';
+    });
+    document.getElementById('marketMeta').textContent = '策略数据生成中…';
+  });
+
   // 外围指标（浏览器直连东财，打开页面即最新）
   emFetch(PUSH_HOSTS, '/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids=100.HSI,100.N225,100.SPX,100.NDX,100.DJIA,122.XAU,102.CL00Y')
   .then(function (d) {
