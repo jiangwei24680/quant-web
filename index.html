@@ -164,6 +164,21 @@ td.sig{font-size:11px;color:#d29922;line-height:1.5}
 </section>
 
 <section class="card">
+  <h2>分市场选股榜<span class="sub">00 / 30 / 60 各前 15</span></h2>
+  <p class="strat" id="marketMeta">策略加载中…</p>
+  <p class="strat"><b>00 市场</b></p>
+  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>总分</th><th>风险参考</th></tr></thead>
+  <tbody id="screen00"></tbody></table>
+  <p class="strat"><b>30 市场</b></p>
+  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>总分</th><th>风险参考</th></tr></thead>
+  <tbody id="screen30"></tbody></table>
+  <p class="strat"><b>60 市场</b></p>
+  <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>总分</th><th>风险参考</th></tr></thead>
+  <tbody id="screen60"></tbody></table>
+  <p class="hint">与选股榜同口径：每市场内成交额前 150（剔 ST）→ 60 日涨幅为正 → 趋势 40 + 资金 30 + 动量 15 + 活跃 15。科创 68 不在内。点任意股票查看 60 日 K 线和今日分时。</p>
+</section>
+
+<section class="card">
   <h2>观察名单<span class="sub">圈定后连看几天</span></h2>
   <table><thead><tr><th>股票</th><th>相关概念</th><th>现价</th><th>今日</th><th>净流入(亿)</th><th>估值/换手</th></tr></thead>
   <tbody id="watch"></tbody></table>
