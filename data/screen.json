@@ -4,420 +4,420 @@
   {
    "code": "000559",
    "name": "万向钱潮",
-   "price": 13.5,
-   "pct": 2.43,
-   "amt_yi": 4.5,
-   "turnover": 0.99518,
-   "g60": 25.35,
+   "price": 13.76,
+   "pct": 4.4,
+   "amt_yi": 19.0,
+   "turnover": 4.24544,
+   "g60": 27.76,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
      "name": "昨日涨停",
-     "pct": 1.41
+     "pct": 0.83
     },
     {
      "name": "最近多板",
-     "pct": -0.27
-    }
-   ]
-  },
-  {
-   "code": "300115",
-   "name": "长盈精密",
-   "price": 28.89,
-   "pct": -1.43,
-   "amt_yi": 3.7,
-   "turnover": 0.95411,
-   "g60": 7.64,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "AIPC",
-     "pct": -2.84
-    },
-    {
-     "name": "电子",
-     "pct": -2.69
-    }
-   ]
-  },
-  {
-   "code": "600519",
-   "name": "贵州茅台",
-   "price": 1335.28,
-   "pct": 0.34,
-   "amt_yi": 3.2,
-   "turnover": 0.01907,
-   "g60": 1.08,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "白酒Ⅱ",
-     "pct": 0.04
-    },
-    {
-     "name": "白酒Ⅲ",
-     "pct": 0.04
+     "pct": -0.75
     }
    ]
   },
   {
    "code": "002249",
    "name": "大洋电机",
-   "price": 8.18,
-   "pct": 2.0,
-   "amt_yi": 2.9,
-   "turnover": 1.93644,
-   "g60": 13.14,
+   "price": 8.31,
+   "pct": 3.62,
+   "amt_yi": 14.7,
+   "turnover": 9.47104,
+   "g60": 14.94,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
-     "name": "最近多板",
-     "pct": -0.28
+     "name": "风能",
+     "pct": -0.78
     },
     {
-     "name": "风能",
-     "pct": -0.84
+     "name": "最近多板",
+     "pct": -0.78
     }
    ]
   },
   {
-   "code": "002472",
-   "name": "双环传动",
-   "price": 44.57,
-   "pct": -1.18,
-   "amt_yi": 2.4,
-   "turnover": 0.69531,
-   "g60": 23.12,
+   "code": "601398",
+   "name": "工商银行",
+   "price": 8.73,
+   "pct": 1.99,
+   "amt_yi": 12.9,
+   "turnover": 0.05523,
+   "g60": 9.81,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
-     "name": "中盘成长",
-     "pct": -2.39
+     "name": "国有大型银行Ⅲ",
+     "pct": 1.88
     },
     {
-     "name": "特斯拉概念",
-     "pct": -1.78
+     "name": "银行Ⅱ",
+     "pct": 1.39
+    }
+   ]
+  },
+  {
+   "code": "600519",
+   "name": "贵州茅台",
+   "price": 1346.89,
+   "pct": 1.21,
+   "amt_yi": 12.1,
+   "turnover": 0.07247,
+   "g60": 1.96,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "白酒Ⅱ",
+     "pct": 0.35
+    },
+    {
+     "name": "白酒Ⅲ",
+     "pct": 0.35
+    }
+   ]
+  },
+  {
+   "code": "688017",
+   "name": "绿的谐波",
+   "price": 297.6,
+   "pct": 1.92,
+   "amt_yi": 11.7,
+   "turnover": 2.17497,
+   "g60": 4.91,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "新能源",
+     "pct": -1.05
+    },
+    {
+     "name": "减速器",
+     "pct": -1.27
+    }
+   ]
+  },
+  {
+   "code": "300115",
+   "name": "长盈精密",
+   "price": 29.03,
+   "pct": -0.96,
+   "amt_yi": 10.5,
+   "turnover": 2.67799,
+   "g60": 8.16,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "电子",
+     "pct": -3.67
+    },
+    {
+     "name": "AIPC",
+     "pct": -3.48
     }
    ]
   },
   {
    "code": "002929",
    "name": "润建股份",
-   "price": 57.31,
-   "pct": 1.88,
-   "amt_yi": 2.3,
-   "turnover": 1.93316,
-   "g60": 21.27,
+   "price": 58.3,
+   "pct": 3.64,
+   "amt_yi": 10.2,
+   "turnover": 8.2203,
+   "g60": 23.36,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
      "name": "风能",
-     "pct": -0.83
+     "pct": -0.77
     },
     {
-     "name": "雄安新区",
-     "pct": -0.86
+     "name": "通信服务",
+     "pct": -0.79
     }
    ]
   },
   {
-   "code": "002889",
-   "name": "东方嘉盛",
-   "price": 16.36,
-   "pct": 5.96,
-   "amt_yi": 2.0,
-   "turnover": 4.77287,
-   "g60": 28.01,
+   "code": "600900",
+   "name": "长江电力",
+   "price": 29.57,
+   "pct": 0.58,
+   "amt_yi": 9.3,
+   "turnover": 0.12871,
+   "g60": 2.21,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 59,
    "parts": [
     40,
     0,
     15,
-    0
+    4
    ],
    "concepts": [
     {
-     "name": "昨日涨停",
-     "pct": 1.43
+     "name": "水力发电",
+     "pct": -0.09
     },
     {
-     "name": "昨日首板",
-     "pct": 0.73
-    }
-   ]
-  },
-  {
-   "code": "300296",
-   "name": "利亚德",
-   "price": 6.19,
-   "pct": -0.48,
-   "amt_yi": 1.9,
-   "turnover": 1.30182,
-   "g60": 17.9,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "电子",
-     "pct": -2.77
-    },
-    {
-     "name": "玻璃基板",
-     "pct": -2.67
+     "name": "保险重仓",
+     "pct": -0.6
     }
    ]
   },
   {
    "code": "688322",
    "name": "奥比中光",
-   "price": 106.75,
-   "pct": -0.38,
-   "amt_yi": 1.6,
-   "turnover": 0.47752,
-   "g60": 23.58,
+   "price": 110.73,
+   "pct": 3.33,
+   "amt_yi": 8.7,
+   "turnover": 2.50368,
+   "g60": 28.19,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 59,
    "parts": [
     40,
     0,
     15,
-    0
+    4
    ],
    "concepts": [
-    {
-     "name": "光学元件",
-     "pct": -3.33
-    },
-    {
-     "name": "电子",
-     "pct": -2.8
-    }
-   ]
-  },
-  {
-   "code": "003021",
-   "name": "兆威机电",
-   "price": 96.09,
-   "pct": -1.36,
-   "amt_yi": 1.5,
-   "turnover": 0.75956,
-   "g60": 27.52,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "荣耀概念",
-     "pct": -2.86
-    },
-    {
-     "name": "混合现实",
-     "pct": -2.73
-    }
-   ]
-  },
-  {
-   "code": "301261",
-   "name": "恒工精密",
-   "price": 63.77,
-   "pct": 1.4,
-   "amt_yi": 1.4,
-   "turnover": 2.0679,
-   "g60": 24.24,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "昨日涨停",
-     "pct": 1.43
-    },
-    {
-     "name": "昨日首板",
-     "pct": 0.71
-    }
-   ]
-  },
-  {
-   "code": "603337",
-   "name": "杰克科技",
-   "price": 49.52,
-   "pct": 1.41,
-   "amt_yi": 1.4,
-   "turnover": 0.5746,
-   "g60": 24.67,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "昨日涨停",
-     "pct": 1.42
-    },
     {
      "name": "近期新高",
-     "pct": 0.14
+     "pct": -0.21
+    },
+    {
+     "name": "数字孪生",
+     "pct": -1.01
     }
    ]
   },
   {
-   "code": "603131",
-   "name": "上海沪工",
-   "price": 14.86,
-   "pct": 2.48,
-   "amt_yi": 1.3,
-   "turnover": 2.55344,
-   "g60": 4.28,
+   "code": "300296",
+   "name": "利亚德",
+   "price": 6.15,
+   "pct": -1.13,
+   "amt_yi": 8.0,
+   "turnover": 5.59069,
+   "g60": 17.14,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 59,
    "parts": [
     40,
     0,
     15,
-    0
+    4
    ],
    "concepts": [
     {
-     "name": "昨日涨停",
-     "pct": 1.39
+     "name": "电子",
+     "pct": -3.65
     },
     {
-     "name": "昨日首板",
-     "pct": 0.65
+     "name": "玻璃基板",
+     "pct": -3.62
     }
    ]
   },
   {
-   "code": "603528",
-   "name": "多伦科技",
-   "price": 8.69,
-   "pct": -2.03,
-   "amt_yi": 2.2,
-   "turnover": 3.60973,
-   "g60": 44.59,
+   "code": "002421",
+   "name": "达实智能",
+   "price": 3.39,
+   "pct": 3.99,
+   "amt_yi": 7.7,
+   "turnover": 11.06453,
+   "g60": 20.21,
    "pe": null,
    "main_net": 0,
-   "score": 50,
+   "score": 59,
    "parts": [
     40,
     0,
-    10,
-    0
+    15,
+    4
    ],
    "concepts": [
     {
-     "name": "华为昇腾",
-     "pct": -2.93
+     "name": "建筑节能",
+     "pct": -0.69
     },
     {
-     "name": "软件开发",
-     "pct": -2.79
+     "name": "雄安新区",
+     "pct": -0.83
+    }
+   ]
+  },
+  {
+   "code": "300503",
+   "name": "昊志机电",
+   "price": 66.3,
+   "pct": 3.29,
+   "amt_yi": 7.4,
+   "turnover": 4.64694,
+   "g60": 7.14,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "商业航天",
+     "pct": -0.46
+    },
+    {
+     "name": "其他通用设备",
+     "pct": -0.95
+    }
+   ]
+  },
+  {
+   "code": "002472",
+   "name": "双环传动",
+   "price": 44.81,
+   "pct": -0.64,
+   "amt_yi": 6.7,
+   "turnover": 1.95638,
+   "g60": 23.78,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "中盘成长",
+     "pct": -3.16
+    },
+    {
+     "name": "基金重仓",
+     "pct": -2.34
+    }
+   ]
+  },
+  {
+   "code": "601288",
+   "name": "农业银行",
+   "price": 7.54,
+   "pct": 1.48,
+   "amt_yi": 6.5,
+   "turnover": 0.02708,
+   "g60": 8.8,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "国有大型银行Ⅲ",
+     "pct": 1.88
+    },
+    {
+     "name": "银行Ⅱ",
+     "pct": 1.42
     }
    ]
   },
   {
    "code": "002354",
    "name": "天娱数科",
-   "price": 8.1,
-   "pct": -0.98,
-   "amt_yi": 2.0,
-   "turnover": 1.52117,
-   "g60": 30.86,
+   "price": 8.43,
+   "pct": 3.06,
+   "amt_yi": 19.5,
+   "turnover": 14.55628,
+   "g60": 36.19,
    "pe": null,
    "main_net": 0,
-   "score": 50,
+   "score": 57,
    "parts": [
     40,
     0,
     10,
-    0
+    7
    ],
    "concepts": [
     {
-     "name": "混合现实",
-     "pct": -2.77
+     "name": "文娱消费",
+     "pct": -0.27
     },
     {
-     "name": "广告营销",
-     "pct": -2.53
+     "name": "谷子经济",
+     "pct": -0.47
     }
    ]
   }
