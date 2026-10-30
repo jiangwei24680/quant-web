@@ -4,39 +4,39 @@
   {
    "code": "600519",
    "name": "贵州茅台",
-   "price": 1375.0,
-   "pct": 1.55,
-   "amt_yi": 19.6,
-   "turnover": 0.115,
-   "g60": 0.97,
+   "price": 1370.77,
+   "pct": 1.24,
+   "amt_yi": 29.1,
+   "turnover": 0.17039,
+   "g60": 0.66,
    "pe": null,
    "main_net": 0,
-   "score": 62,
+   "score": 66,
    "parts": [
     40,
     0,
     15,
-    7
+    11
    ],
    "concepts": [
     {
      "name": "白酒Ⅱ",
-     "pct": 4.17
+     "pct": 3.96
     },
     {
      "name": "白酒Ⅲ",
-     "pct": 4.17
+     "pct": 3.96
     }
    ]
   },
   {
    "code": "601398",
    "name": "工商银行",
-   "price": 8.68,
-   "pct": -1.14,
-   "amt_yi": 10.8,
-   "turnover": 0.046,
-   "g60": 6.5,
+   "price": 8.7,
+   "pct": -0.91,
+   "amt_yi": 16.2,
+   "turnover": 0.0688,
+   "g60": 6.75,
    "pe": null,
    "main_net": 0,
    "score": 62,
@@ -49,22 +49,78 @@
    "concepts": [
     {
      "name": "跨境支付",
-     "pct": -1.95
+     "pct": -2.09
     },
     {
      "name": "百日新高",
-     "pct": -1.7
+     "pct": -1.77
+    }
+   ]
+  },
+  {
+   "code": "688585",
+   "name": "上纬新材",
+   "price": 151.53,
+   "pct": -9.64,
+   "amt_yi": 14.1,
+   "turnover": 2.15301,
+   "g60": 10.62,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "中盘成长",
+     "pct": -2.42
+    },
+    {
+     "name": "人形机器人",
+     "pct": -2.14
+    }
+   ]
+  },
+  {
+   "code": "601288",
+   "name": "农业银行",
+   "price": 7.43,
+   "pct": -1.72,
+   "amt_yi": 14.1,
+   "turnover": 0.05896,
+   "g60": 4.5,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "跨境支付",
+     "pct": -2.06
+    },
+    {
+     "name": "百日新高",
+     "pct": -1.76
     }
    ]
   },
   {
    "code": "600028",
    "name": "中国石化",
-   "price": 5.8,
-   "pct": 3.2,
-   "amt_yi": 10.4,
-   "turnover": 0.19065,
-   "g60": 10.06,
+   "price": 5.79,
+   "pct": 3.02,
+   "amt_yi": 13.9,
+   "turnover": 0.2553,
+   "g60": 9.87,
    "pe": null,
    "main_net": 0,
    "score": 62,
@@ -77,22 +133,22 @@
    "concepts": [
     {
      "name": "炼油化工",
-     "pct": 0.97
+     "pct": 0.69
     },
     {
      "name": "石油石化",
-     "pct": 0.49
+     "pct": 0.0
     }
    ]
   },
   {
    "code": "603667",
    "name": "五洲新春",
-   "price": 50.8,
-   "pct": -4.35,
-   "amt_yi": 10.3,
-   "turnover": 5.12563,
-   "g60": 5.31,
+   "price": 50.52,
+   "pct": -4.88,
+   "amt_yi": 13.7,
+   "turnover": 6.85643,
+   "g60": 4.73,
    "pe": null,
    "main_net": 0,
    "score": 62,
@@ -105,151 +161,39 @@
    "concepts": [
     {
      "name": "昨日高换手",
-     "pct": -2.49
+     "pct": -2.29
     },
     {
-     "name": "昨日高振幅",
-     "pct": -2.35
+     "name": "人形机器人",
+     "pct": -2.08
     }
    ]
   },
   {
    "code": "000559",
    "name": "万向钱潮",
-   "price": 12.61,
-   "pct": -3.15,
-   "amt_yi": 9.8,
-   "turnover": 2.27098,
-   "g60": 17.74,
+   "price": 12.44,
+   "pct": -4.45,
+   "amt_yi": 13.6,
+   "turnover": 3.20378,
+   "g60": 16.15,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
-    {
-     "name": "昨日高振幅",
-     "pct": -2.35
-    },
     {
      "name": "人形机器人",
-     "pct": -2.3
-    }
-   ]
-  },
-  {
-   "code": "688585",
-   "name": "上纬新材",
-   "price": 160.87,
-   "pct": -4.07,
-   "amt_yi": 9.0,
-   "turnover": 1.33743,
-   "g60": 17.44,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "中盘成长",
-     "pct": -2.93
+     "pct": -2.06
     },
     {
-     "name": "高市净率",
-     "pct": -2.51
-    }
-   ]
-  },
-  {
-   "code": "600036",
-   "name": "招商银行",
-   "price": 43.11,
-   "pct": 0.4,
-   "amt_yi": 9.0,
-   "turnover": 0.101,
-   "g60": 6.31,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "茅指数",
-     "pct": 0.29
-    },
-    {
-     "name": "大盘价值",
-     "pct": 0.05
-    }
-   ]
-  },
-  {
-   "code": "688322",
-   "name": "奥比中光",
-   "price": 102.6,
-   "pct": 0.02,
-   "amt_yi": 8.8,
-   "turnover": 2.61761,
-   "g60": 28.28,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "基金增仓",
-     "pct": -1.68
-    },
-    {
-     "name": "3D打印",
-     "pct": -1.75
-    }
-   ]
-  },
-  {
-   "code": "601288",
-   "name": "农业银行",
-   "price": 7.46,
-   "pct": -1.32,
-   "amt_yi": 8.6,
-   "turnover": 0.03587,
-   "g60": 4.92,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "跨境支付",
-     "pct": -1.96
-    },
-    {
-     "name": "百日新高",
-     "pct": -1.7
+     "name": "底盘与发动机系统",
+     "pct": -1.86
     }
    ]
   },
@@ -258,65 +202,177 @@
    "name": "大洋电机",
    "price": 7.56,
    "pct": -7.69,
-   "amt_yi": 8.4,
-   "turnover": 5.82204,
+   "amt_yi": 12.7,
+   "turnover": 8.86612,
    "g60": 4.28,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
      "name": "AIGC概念",
-     "pct": -3.19
+     "pct": -3.06
     },
     {
-     "name": "液冷服务器",
-     "pct": -2.55
+     "name": "昨日高换手",
+     "pct": -2.25
     }
    ]
   },
   {
    "code": "600900",
    "name": "长江电力",
-   "price": 29.93,
-   "pct": -0.2,
-   "amt_yi": 8.3,
-   "turnover": 0.11333,
-   "g60": 1.49,
+   "price": 29.77,
+   "pct": -0.73,
+   "amt_yi": 12.6,
+   "turnover": 0.17272,
+   "g60": 0.95,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
-     "name": "储能概念",
-     "pct": -1.63
+     "name": "风能",
+     "pct": -1.49
     },
     {
-     "name": "风能",
-     "pct": -1.55
+     "name": "储能概念",
+     "pct": -1.39
+    }
+   ]
+  },
+  {
+   "code": "600036",
+   "name": "招商银行",
+   "price": 42.9,
+   "pct": -0.09,
+   "amt_yi": 12.6,
+   "turnover": 0.14178,
+   "g60": 5.8,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "跨境支付",
+     "pct": -2.07
+    },
+    {
+     "name": "区块链",
+     "pct": -1.65
+    }
+   ]
+  },
+  {
+   "code": "688322",
+   "name": "奥比中光",
+   "price": 99.71,
+   "pct": -2.8,
+   "amt_yi": 11.9,
+   "turnover": 3.5904,
+   "g60": 24.67,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "3D摄像头",
+     "pct": -3.08
+    },
+    {
+     "name": "元宇宙概念",
+     "pct": -2.46
+    }
+   ]
+  },
+  {
+   "code": "600887",
+   "name": "伊利股份",
+   "price": 29.48,
+   "pct": 0.1,
+   "amt_yi": 10.6,
+   "turnover": 0.57514,
+   "g60": 6.46,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "食品饮料",
+     "pct": 0.98
+    },
+    {
+     "name": "超级品牌",
+     "pct": 0.68
+    }
+   ]
+  },
+  {
+   "code": "601857",
+   "name": "中国石油",
+   "price": 13.62,
+   "pct": -0.51,
+   "amt_yi": 10.5,
+   "turnover": 0.04745,
+   "g60": 20.85,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "百日新高",
+     "pct": -1.74
+    },
+    {
+     "name": "机构重仓",
+     "pct": -0.95
     }
    ]
   },
   {
    "code": "002009",
    "name": "天奇股份",
-   "price": 17.69,
-   "pct": 6.57,
-   "amt_yi": 8.2,
-   "turnover": 13.00149,
-   "g60": 10.77,
+   "price": 17.55,
+   "pct": 5.72,
+   "amt_yi": 9.9,
+   "turnover": 15.66086,
+   "g60": 9.89,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -329,95 +385,39 @@
    "concepts": [
     {
      "name": "汽车拆解",
-     "pct": -0.56
+     "pct": -0.21
     },
     {
      "name": "垃圾分类",
-     "pct": -0.67
+     "pct": -0.5
     }
    ]
   },
   {
-   "code": "688818",
-   "name": "电科蓝天",
-   "price": 47.38,
-   "pct": 2.18,
-   "amt_yi": 7.3,
-   "turnover": 10.89206,
-   "g60": 14.58,
+   "code": "002354",
+   "name": "天娱数科",
+   "price": 7.75,
+   "pct": -7.3,
+   "amt_yi": 17.3,
+   "turnover": 13.42297,
+   "g60": 30.91,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 57,
    "parts": [
     40,
     0,
-    15,
-    4
+    10,
+    7
    ],
    "concepts": [
     {
-     "name": "航天装备Ⅱ",
-     "pct": 0.91
+     "name": "AI语料",
+     "pct": -3.87
     },
     {
-     "name": "航天装备Ⅲ",
-     "pct": 0.91
-    }
-   ]
-  },
-  {
-   "code": "300760",
-   "name": "迈瑞医疗",
-   "price": 180.0,
-   "pct": 0.56,
-   "amt_yi": 6.8,
-   "turnover": 0.31524,
-   "g60": 11.37,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "茅指数",
-     "pct": 0.28
-    },
-    {
-     "name": "医药医疗风格",
-     "pct": 0.0
-    }
-   ]
-  },
-  {
-   "code": "601857",
-   "name": "中国石油",
-   "price": 13.78,
-   "pct": 0.66,
-   "amt_yi": 6.7,
-   "turnover": 0.03032,
-   "g60": 22.27,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "炼油化工",
-     "pct": 0.97
-    },
-    {
-     "name": "石油石化",
-     "pct": 0.58
+     "name": "短剧互动游戏",
+     "pct": -3.57
     }
    ]
   }
