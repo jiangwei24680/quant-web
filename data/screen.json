@@ -4,11 +4,11 @@
   {
    "code": "600519",
    "name": "贵州茅台",
-   "price": 1441.0,
-   "pct": -0.38,
-   "amt_yi": 21.1,
-   "turnover": 0.11601,
-   "g60": 10.3,
+   "price": 1437.75,
+   "pct": -0.6,
+   "amt_yi": 34.4,
+   "turnover": 0.19014,
+   "g60": 10.05,
    "pe": null,
    "main_net": 0,
    "score": 66,
@@ -21,39 +21,39 @@
    "concepts": [
     {
      "name": "近期新高",
-     "pct": -0.57
+     "pct": -0.5
     },
     {
      "name": "百日新高",
-     "pct": -0.15
+     "pct": -0.08
     }
    ]
   },
   {
    "code": "002241",
    "name": "歌尔股份",
-   "price": 24.55,
-   "pct": 3.89,
-   "amt_yi": 16.2,
-   "turnover": 2.10024,
-   "g60": 3.54,
+   "price": 25.08,
+   "pct": 6.14,
+   "amt_yi": 25.3,
+   "turnover": 3.25844,
+   "g60": 5.78,
    "pe": null,
    "main_net": 0,
-   "score": 62,
+   "score": 66,
    "parts": [
     40,
     0,
     15,
-    7
+    11
    ],
    "concepts": [
     {
      "name": "智能音箱",
-     "pct": 5.75
+     "pct": 5.11
     },
     {
      "name": "无线耳机",
-     "pct": 4.65
+     "pct": 4.18
     }
    ]
   },
@@ -62,8 +62,8 @@
    "name": "康龙化成",
    "price": 49.99,
    "pct": 7.71,
-   "amt_yi": 14.3,
-   "turnover": 2.07849,
+   "amt_yi": 18.6,
+   "turnover": 2.69163,
    "g60": 25.1,
    "pe": null,
    "main_net": 0,
@@ -77,78 +77,50 @@
    "concepts": [
     {
      "name": "医疗研发外包",
-     "pct": 5.07
+     "pct": 3.26
     },
     {
-     "name": "医疗服务",
-     "pct": 3.92
-    }
-   ]
-  },
-  {
-   "code": "601318",
-   "name": "中国平安",
-   "price": 54.2,
-   "pct": 0.35,
-   "amt_yi": 9.4,
-   "turnover": 0.163,
-   "g60": 0.33,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "基金重仓",
-     "pct": 3.54
-    },
-    {
-     "name": "深圳特区",
-     "pct": 2.6
+     "name": "昨日高振幅",
+     "pct": 3.18
     }
    ]
   },
   {
    "code": "300115",
    "name": "长盈精密",
-   "price": 30.19,
-   "pct": -1.98,
-   "amt_yi": 9.2,
-   "turnover": 2.26413,
-   "g60": 5.56,
+   "price": 30.96,
+   "pct": 0.52,
+   "amt_yi": 13.0,
+   "turnover": 3.18258,
+   "g60": 8.25,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
-     "name": "减速器",
-     "pct": 1.95
+     "name": "无线耳机",
+     "pct": 4.16
     },
     {
-     "name": "养老金",
-     "pct": 2.43
+     "name": "消费电子",
+     "pct": 3.72
     }
    ]
   },
   {
    "code": "688018",
    "name": "乐鑫科技",
-   "price": 167.33,
-   "pct": 7.77,
-   "amt_yi": 13.7,
-   "turnover": 3.59957,
-   "g60": 51.17,
+   "price": 168.88,
+   "pct": 8.77,
+   "amt_yi": 18.2,
+   "turnover": 4.72375,
+   "g60": 52.57,
    "pe": null,
    "main_net": 0,
    "score": 57,
@@ -160,23 +132,23 @@
    ],
    "concepts": [
     {
-     "name": "半导体",
-     "pct": 5.0
+     "name": "消费电子概念",
+     "pct": 3.42
     },
     {
-     "name": "数字芯片设计",
-     "pct": 4.5
+     "name": "半导体",
+     "pct": 3.33
     }
    ]
   },
   {
    "code": "002827",
    "name": "高争民爆",
-   "price": 73.3,
-   "pct": 6.31,
-   "amt_yi": 20.1,
-   "turnover": 10.03413,
-   "g60": 63.76,
+   "price": 72.14,
+   "pct": 4.63,
+   "amt_yi": 22.5,
+   "turnover": 11.23286,
+   "g60": 61.17,
    "pe": null,
    "main_net": 0,
    "score": 56,
@@ -189,50 +161,78 @@
    "concepts": [
     {
      "name": "最近多板",
-     "pct": 4.74
+     "pct": 4.19
     },
     {
-     "name": "高市净率",
-     "pct": 3.31
+     "name": "化学制品",
+     "pct": 2.78
     }
    ]
   },
   {
    "code": "002086",
    "name": "东方海洋",
-   "price": 3.61,
-   "pct": 10.06,
-   "amt_yi": 16.3,
-   "turnover": 30.3165,
-   "g60": 93.05,
+   "price": 3.54,
+   "pct": 7.93,
+   "amt_yi": 21.8,
+   "turnover": 39.98389,
+   "g60": 89.3,
    "pe": null,
    "main_net": 0,
-   "score": 52,
+   "score": 56,
    "parts": [
     40,
     0,
     5,
-    7
+    11
    ],
    "concepts": [
     {
      "name": "最近多板",
-     "pct": 4.75
+     "pct": 4.2
     },
     {
      "name": "昨日高振幅",
-     "pct": 3.86
+     "pct": 3.16
     }
    ]
   },
   {
    "code": "300413",
    "name": "芒果超媒",
-   "price": 29.31,
-   "pct": -2.3,
-   "amt_yi": 14.9,
-   "turnover": 4.91586,
-   "g60": 77.96,
+   "price": 29.7,
+   "pct": -1.0,
+   "amt_yi": 20.0,
+   "turnover": 6.61216,
+   "g60": 80.33,
+   "pe": null,
+   "main_net": 0,
+   "score": 56,
+   "parts": [
+    40,
+    0,
+    5,
+    11
+   ],
+   "concepts": [
+    {
+     "name": "视频媒体",
+     "pct": -3.07
+    },
+    {
+     "name": "近期新高",
+     "pct": -0.52
+    }
+   ]
+  },
+  {
+   "code": "605488",
+   "name": "福莱新材",
+   "price": 49.27,
+   "pct": 10.0,
+   "amt_yi": 14.0,
+   "turnover": 9.9228,
+   "g60": 76.15,
    "pe": null,
    "main_net": 0,
    "score": 52,
@@ -244,23 +244,107 @@
    ],
    "concepts": [
     {
-     "name": "视频媒体",
-     "pct": -1.67
+     "name": "昨日首板",
+     "pct": 5.82
     },
     {
-     "name": "近期新高",
-     "pct": -0.59
+     "name": "昨日涨停",
+     "pct": 5.64
+    }
+   ]
+  },
+  {
+   "code": "603259",
+   "name": "药明康德",
+   "price": 156.72,
+   "pct": 5.32,
+   "amt_yi": 49.0,
+   "turnover": 1.29335,
+   "g60": 6.25,
+   "pe": null,
+   "main_net": 0,
+   "score": 51,
+   "parts": [
+    25,
+    0,
+    15,
+    11
+   ],
+   "concepts": [
+    {
+     "name": "昨日首板",
+     "pct": 5.82
+    },
+    {
+     "name": "昨日涨停",
+     "pct": 5.63
+    }
+   ]
+  },
+  {
+   "code": "603893",
+   "name": "瑞芯微",
+   "price": 217.81,
+   "pct": 10.0,
+   "amt_yi": 27.6,
+   "turnover": 3.08615,
+   "g60": 9.45,
+   "pe": null,
+   "main_net": 0,
+   "score": 51,
+   "parts": [
+    25,
+    0,
+    15,
+    11
+   ],
+   "concepts": [
+    {
+     "name": "昨日首板",
+     "pct": 5.82
+    },
+    {
+     "name": "昨日涨停",
+     "pct": 5.63
+    }
+   ]
+  },
+  {
+   "code": "000678",
+   "name": "襄阳轴承",
+   "price": 20.06,
+   "pct": 2.98,
+   "amt_yi": 17.4,
+   "turnover": 19.17467,
+   "g60": 122.39,
+   "pe": null,
+   "main_net": 0,
+   "score": 49,
+   "parts": [
+    40,
+    0,
+    2,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "昨日高振幅",
+     "pct": 3.13
+    },
+    {
+     "name": "连续亏损",
+     "pct": 2.7
     }
    ]
   },
   {
    "code": "300006",
    "name": "莱美药业",
-   "price": 10.7,
-   "pct": 12.28,
-   "amt_yi": 14.1,
-   "turnover": 12.87923,
-   "g60": 112.3,
+   "price": 10.77,
+   "pct": 13.01,
+   "amt_yi": 16.5,
+   "turnover": 14.94099,
+   "g60": 113.69,
    "pe": null,
    "main_net": 0,
    "score": 49,
@@ -273,106 +357,22 @@
    "concepts": [
     {
      "name": "连续亏损",
-     "pct": 2.96
+     "pct": 2.69
     },
     {
-     "name": "知识产权",
-     "pct": 2.92
-    }
-   ]
-  },
-  {
-   "code": "000678",
-   "name": "襄阳轴承",
-   "price": 19.79,
-   "pct": 1.59,
-   "amt_yi": 12.8,
-   "turnover": 14.21487,
-   "g60": 119.4,
-   "pe": null,
-   "main_net": 0,
-   "score": 49,
-   "parts": [
-    40,
-    0,
-    2,
-    7
-   ],
-   "concepts": [
-    {
-     "name": "昨日高振幅",
-     "pct": 3.83
-    },
-    {
-     "name": "高市净率",
-     "pct": 3.28
-    }
-   ]
-  },
-  {
-   "code": "605488",
-   "name": "福莱新材",
-   "price": 47.25,
-   "pct": 5.49,
-   "amt_yi": 9.9,
-   "turnover": 7.15338,
-   "g60": 68.93,
-   "pe": null,
-   "main_net": 0,
-   "score": 49,
-   "parts": [
-    40,
-    0,
-    5,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "昨日首板",
-     "pct": 6.82
-    },
-    {
-     "name": "昨日涨停",
-     "pct": 6.58
-    }
-   ]
-  },
-  {
-   "code": "603893",
-   "name": "瑞芯微",
-   "price": 212.51,
-   "pct": 7.32,
-   "amt_yi": 19.5,
-   "turnover": 2.20628,
-   "g60": 6.79,
-   "pe": null,
-   "main_net": 0,
-   "score": 47,
-   "parts": [
-    25,
-    0,
-    15,
-    7
-   ],
-   "concepts": [
-    {
-     "name": "昨日首板",
-     "pct": 6.79
-    },
-    {
-     "name": "昨日涨停",
-     "pct": 6.56
+     "name": "辅助生殖",
+     "pct": 2.17
     }
    ]
   },
   {
    "code": "300364",
    "name": "中文在线",
-   "price": 26.82,
-   "pct": 3.23,
-   "amt_yi": 15.2,
-   "turnover": 8.58162,
-   "g60": 1.36,
+   "price": 26.7,
+   "pct": 2.77,
+   "amt_yi": 19.3,
+   "turnover": 10.88016,
+   "g60": 0.91,
    "pe": null,
    "main_net": 0,
    "score": 47,
@@ -385,22 +385,22 @@
    "concepts": [
     {
      "name": "Kimi概念",
-     "pct": 7.57
+     "pct": 5.67
     },
     {
      "name": "快手概念",
-     "pct": 4.3
+     "pct": 3.11
     }
    ]
   },
   {
    "code": "601857",
    "name": "中国石油",
-   "price": 12.66,
-   "pct": -7.05,
-   "amt_yi": 12.1,
-   "turnover": 0.0587,
-   "g60": 19.1,
+   "price": 12.57,
+   "pct": -7.71,
+   "amt_yi": 18.2,
+   "turnover": 0.08905,
+   "g60": 18.25,
    "pe": null,
    "main_net": 0,
    "score": 47,
@@ -413,11 +413,11 @@
    "concepts": [
     {
      "name": "资源开采概念",
-     "pct": -1.24
+     "pct": -0.91
     },
     {
      "name": "中特估",
-     "pct": -0.83
+     "pct": -0.65
     }
    ]
   }
@@ -425,7 +425,7 @@
  "meta": {
   "name": "综合评分策略",
   "pool": 150,
-  "scored": 30,
+  "scored": 33,
   "rule": "成交额前150 → 60日涨幅为正预筛 → 逐只K线算 趋势40+资金30+动量15+活跃15",
   "source": "本地库 quant.db（新浪管线）",
   "fund_flow": "缺失(资金项降级为0)"
