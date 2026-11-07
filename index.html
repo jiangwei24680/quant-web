@@ -15,14 +15,14 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
 header{text-align:center;padding:10px 0 14px}
 header h1{font-size:20px;font-weight:700}
 header .date{color:var(--dim);font-size:13px;margin-top:4px}
-section.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px}
+section.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;overflow-x:auto}
 section h2{font-size:15px;margin-bottom:10px}
 section h2 .sub{color:var(--dim);font-size:11px;font-weight:400;margin-left:6px}
 .overview{display:flex;gap:8px}
 .stat{flex:1;text-align:center;background:#0d1117;border:1px solid var(--border);border-radius:8px;padding:10px 4px}
 .stat .v{font-size:19px;font-weight:700}
 .stat .l{font-size:12px;color:var(--dim);margin-top:4px}
-table{width:100%;border-collapse:collapse;font-size:13px}
+table{width:100%;min-width:700px;border-collapse:collapse;font-size:13px}
 th{color:var(--dim);font-weight:400;text-align:right;padding:6px 4px;border-bottom:1px solid var(--border)}
 th:first-child,th:nth-child(2){text-align:left}
 td{padding:7px 4px;border-bottom:1px solid #1c2128;text-align:right;font-variant-numeric:tabular-nums}
@@ -229,6 +229,6 @@ td.sig{font-size:11px;color:#d29922;line-height:1.5}
   </div>
 </div>
 
-<script src="app.js?v=10"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>
