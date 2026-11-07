@@ -83,6 +83,7 @@ function emFetch(hosts, path) {
     var sig = (it.signals || []).join(' · ');
     if (it.near_limit) sig += '<span class="limtag">逼近涨停</span>';
     return '<tr data-code="' + it.code + '"' + (it.near_limit ? ' class="limit"' : '') + '><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + (typeof it.price === 'number' ? it.price.toFixed(2) : '—') + '</td>'
       + '<td>' + fmtPct(it.pct) + '</td>'
       + '<td>' + (typeof it.vol_ratio === 'number' ? it.vol_ratio.toFixed(2) : '—') + '</td>'
       + '<td class="' + (it.main_net > 0 ? 'up' : (it.main_net < 0 ? 'dn' : '')) + '">'
@@ -90,16 +91,17 @@ function emFetch(hosts, path) {
       + '<td>' + (typeof it.turnover === 'number' ? it.turnover.toFixed(2) + '%' : '—') + '</td>'
       + '<td class="sig">' + sig + '</td></tr>';
   };
-  var radarEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发信号的股票。</td></tr>';
+  var radarEmpty = '<tr><td colspan="7" style="text-align:left;color:#8b949e">今日无触发信号的股票。</td></tr>';
   var oversoldRow = function (it) {
     return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
+      + '<td>' + (typeof it.price === 'number' ? it.price.toFixed(2) : '—') + '</td>'
       + '<td>' + fmtPct(it.pct) + '</td>'
       + '<td>' + fmtPct(it.dev_cost) + '</td>'
       + '<td>' + fmtPct(it.ret21) + '</td>'
       + '<td>' + (it.signal_date ? it.signal_date.slice(5) : '—') + '</td>'
       + '<td>' + (it.confirm_date ? it.confirm_date.slice(5) : '—') + '</td></tr>';
   };
-  var oversoldEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
+  var oversoldEmpty = '<tr><td colspan="7" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
   var fwdEmpty = '<tr><td colspan="6" style="text-align:left;color:#8b949e">今日无触发。</td></tr>';
   var forwardPreRow = function (it) {
     return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + ' · ' + it.board + '</span></td>'
@@ -133,7 +135,7 @@ function emFetch(hosts, path) {
     document.getElementById('radarChips').innerHTML = chipHtml;
     var hit = function (it) { return !radarFilter || (it.signals || []).indexOf(radarFilter) >= 0; };
     var emptyRow = radarFilter
-      ? '<tr><td colspan="6" style="text-align:left;color:#8b949e">「' + radarFilter + '」信号下暂无股票。</td></tr>'
+      ? '<tr><td colspan="7" style="text-align:left;color:#8b949e">「' + radarFilter + '」信号下暂无股票。</td></tr>'
       : radarEmpty;
     var gem = (radarData.gem_list || []).filter(hit);
     var lst = all.filter(hit);
@@ -155,9 +157,9 @@ function emFetch(hosts, path) {
     document.getElementById('forwardPull').innerHTML = (fw.pull && fw.pull.length) ? fw.pull.map(forwardPullRow).join('') : fwdEmpty;
     document.getElementById('forwardFund').innerHTML = (fw.fund && fw.fund.length) ? fw.fund.map(forwardFundRow).join('') : fwdEmpty;
   }).catch(function () {
-    document.getElementById('radarGem').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
-    document.getElementById('radarAll').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
-    document.getElementById('radarOversold').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('radarGem').innerHTML = '<tr><td colspan="7" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('radarAll').innerHTML = '<tr><td colspan="7" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
+    document.getElementById('radarOversold').innerHTML = '<tr><td colspan="7" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('forwardPre').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('forwardPull').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
     document.getElementById('forwardFund').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">雷达数据生成中，稍后刷新。</td></tr>';
