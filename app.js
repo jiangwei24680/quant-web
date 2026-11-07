@@ -79,6 +79,33 @@ function emFetch(hosts, path) {
     document.getElementById('date').textContent = '暂无';
   });
 
+  // 游资龙虎榜
+  var lhbSeat = function (s) {
+    if (!s) return '—';
+    var label = s.nick ? s.nick : s.seat;
+    var amt = fmtYi(s.net);
+    return label + ' ' + amt;
+  };
+  var lhbRow = function (it) {
+    var buy = (it.top_buy || []).slice(0, 2).map(lhbSeat).join('<br>');
+    var sell = (it.top_sell || []).slice(0, 2).map(lhbSeat).join('<br>');
+    return '<tr data-code="' + it.code + '"><td><span>' + it.name + '</span><span class="code">' + it.code + '</span></td>'
+      + '<td>' + (typeof it.price === 'number' ? it.price.toFixed(2) : '—') + '</td>'
+      + '<td>' + fmtPct(it.pct) + '</td>'
+      + '<td class="' + (it.net > 0 ? 'up' : (it.net < 0 ? 'dn' : '')) + '">' + fmtYi(it.net) + '</td>'
+      + '<td style="text-align:left">' + (buy || '—') + '</td>'
+      + '<td style="text-align:left">' + (sell || '—') + '</td></tr>';
+  };
+  fetch('data/lhb.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+    document.getElementById('lhbDate').textContent = '｜' + d.date + ' · 上榜 ' + d.count + ' 只';
+    var items = (d.items || []).slice(0, 30);
+    document.getElementById('lhbBody').innerHTML = items.length
+      ? items.map(lhbRow).join('')
+      : '<tr><td colspan="6" style="text-align:left;color:#8b949e">当日无龙虎榜数据。</td></tr>';
+  }).catch(function () {
+    document.getElementById('lhbBody').innerHTML = '<tr><td colspan="6" style="text-align:left;color:#8b949e">龙虎榜数据暂未生成。</td></tr>';
+  });
+
   var radarRow = function (it) {
     var sig = (it.signals || []).join(' · ');
     if (it.near_limit) sig += '<span class="limtag">逼近涨停</span>';
