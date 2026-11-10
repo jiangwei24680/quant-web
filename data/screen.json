@@ -2,422 +2,422 @@
  "date": "2026-11-10",
  "items": [
   {
-   "code": "002565",
-   "name": "顺灏股份",
-   "price": 10.6,
-   "pct": 0.57,
-   "amt_yi": 3.6,
-   "turnover": 3.11394,
-   "g60": 7.29,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "昨日涨停",
-     "pct": 3.07
-    },
-    {
-     "name": "商业航天",
-     "pct": 2.12
-    }
-   ]
-  },
-  {
    "code": "002149",
    "name": "西部材料",
-   "price": 42.15,
-   "pct": 1.54,
-   "amt_yi": 3.4,
-   "turnover": 1.69419,
-   "g60": 1.98,
+   "price": 41.64,
+   "pct": 0.31,
+   "amt_yi": 18.8,
+   "turnover": 9.29091,
+   "g60": 0.75,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
-     "name": "昨日涨停",
-     "pct": 3.07
+     "name": "昨日首板",
+     "pct": 4.03
     },
     {
-     "name": "昨日首板",
-     "pct": 3.07
+     "name": "昨日涨停",
+     "pct": 3.89
     }
    ]
   },
   {
    "code": "300364",
    "name": "中文在线",
-   "price": 27.3,
-   "pct": 1.56,
-   "amt_yi": 2.8,
-   "turnover": 1.57533,
-   "g60": 6.23,
+   "price": 27.55,
+   "pct": 2.49,
+   "amt_yi": 16.0,
+   "turnover": 8.75377,
+   "g60": 7.2,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
      "name": "文字媒体",
-     "pct": 7.45
+     "pct": 8.05
     },
     {
      "name": "AI视频",
-     "pct": 4.34
+     "pct": 3.58
     }
    ]
   },
   {
-   "code": "002929",
-   "name": "润建股份",
-   "price": 58.82,
-   "pct": -0.31,
-   "amt_yi": 2.6,
-   "turnover": 2.00517,
-   "g60": 3.47,
+   "code": "002565",
+   "name": "顺灏股份",
+   "price": 10.64,
+   "pct": 0.95,
+   "amt_yi": 14.6,
+   "turnover": 12.86299,
+   "g60": 7.69,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
-    {
-     "name": "标准普尔",
-     "pct": 0.49
-    },
-    {
-     "name": "雄安新区",
-     "pct": 0.62
-    }
-   ]
-  },
-  {
-   "code": "300118",
-   "name": "东方日升",
-   "price": 10.88,
-   "pct": 0.28,
-   "amt_yi": 2.5,
-   "turnover": 2.46066,
-   "g60": 3.42,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "昨日高振幅",
-     "pct": 2.03
-    },
-    {
-     "name": "昨日高换手",
-     "pct": 1.88
-    }
-   ]
-  },
-  {
-   "code": "002354",
-   "name": "天娱数科",
-   "price": 8.5,
-   "pct": 5.07,
-   "amt_yi": 2.3,
-   "turnover": 1.68267,
-   "g60": 1.55,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "AI视频",
-     "pct": 4.43
-    },
-    {
-     "name": "AI语料",
-     "pct": 3.87
-    }
-   ]
-  },
-  {
-   "code": "002347",
-   "name": "泰尔股份",
-   "price": 7.7,
-   "pct": 10.0,
-   "amt_yi": 2.0,
-   "turnover": 5.32382,
-   "g60": 27.91,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "昨日首板",
-     "pct": 3.16
-    },
     {
      "name": "昨日涨停",
-     "pct": 3.15
-    }
-   ]
-  },
-  {
-   "code": "002241",
-   "name": "歌尔股份",
-   "price": 24.53,
-   "pct": -0.85,
-   "amt_yi": 1.7,
-   "turnover": 0.21742,
-   "g60": 7.45,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "茅指数",
-     "pct": -0.11
+     "pct": 3.87
     },
     {
-     "name": "标准普尔",
-     "pct": 0.5
-    }
-   ]
-  },
-  {
-   "code": "300115",
-   "name": "长盈精密",
-   "price": 31.23,
-   "pct": 5.36,
-   "amt_yi": 1.4,
-   "turnover": 0.33844,
-   "g60": 12.83,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "机器人执行器",
-     "pct": 3.01
-    },
-    {
-     "name": "人形机器人",
-     "pct": 2.81
-    }
-   ]
-  },
-  {
-   "code": "300953",
-   "name": "震裕科技",
-   "price": 112.76,
-   "pct": 5.92,
-   "amt_yi": 1.4,
-   "turnover": 0.73042,
-   "g60": 12.03,
-   "pe": null,
-   "main_net": 0,
-   "score": 55,
-   "parts": [
-    40,
-    0,
-    15,
-    0
-   ],
-   "concepts": [
-    {
-     "name": "人形机器人",
-     "pct": 2.8
-    },
-    {
-     "name": "飞行汽车(eVTOL)",
-     "pct": 2.18
+     "name": "最近多板",
+     "pct": 2.78
     }
    ]
   },
   {
    "code": "300182",
    "name": "捷成股份",
-   "price": 6.05,
-   "pct": 2.72,
-   "amt_yi": 1.3,
-   "turnover": 0.89911,
-   "g60": 12.87,
+   "price": 6.03,
+   "pct": 2.38,
+   "amt_yi": 11.0,
+   "turnover": 7.42838,
+   "g60": 12.5,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
      "name": "影视动漫制作",
-     "pct": 5.91
+     "pct": 5.38
     },
     {
      "name": "影视院线",
-     "pct": 5.42
+     "pct": 5.04
     }
    ]
   },
   {
-   "code": "600519",
-   "name": "贵州茅台",
-   "price": 1432.6,
-   "pct": -0.86,
-   "amt_yi": 1.2,
-   "turnover": 0.00684,
-   "g60": 6.21,
+   "code": "300115",
+   "name": "长盈精密",
+   "price": 31.43,
+   "pct": 6.04,
+   "amt_yi": 10.2,
+   "turnover": 2.41618,
+   "g60": 13.55,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    0
+    7
    ],
    "concepts": [
     {
-     "name": "超级品牌",
-     "pct": -0.3
+     "name": "机器人执行器",
+     "pct": 3.39
     },
     {
-     "name": "茅指数",
-     "pct": -0.03
+     "name": "人形机器人",
+     "pct": 3.09
+    }
+   ]
+  },
+  {
+   "code": "002929",
+   "name": "润建股份",
+   "price": 57.56,
+   "pct": -2.44,
+   "amt_yi": 9.7,
+   "turnover": 7.60681,
+   "g60": 1.25,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "标准普尔",
+     "pct": 0.36
+    },
+    {
+     "name": "新能源",
+     "pct": 0.38
+    }
+   ]
+  },
+  {
+   "code": "300118",
+   "name": "东方日升",
+   "price": 10.92,
+   "pct": 0.65,
+   "amt_yi": 8.6,
+   "turnover": 8.48468,
+   "g60": 3.8,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "昨日高换手",
+     "pct": 2.42
+    },
+    {
+     "name": "昨日高振幅",
+     "pct": 2.2
     }
    ]
   },
   {
    "code": "603893",
    "name": "瑞芯微",
-   "price": 215.99,
-   "pct": 1.88,
-   "amt_yi": 1.2,
-   "turnover": 0.13133,
-   "g60": 5.21,
+   "price": 213.78,
+   "pct": 0.84,
+   "amt_yi": 8.5,
+   "turnover": 0.93185,
+   "g60": 4.13,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 59,
    "parts": [
     40,
     0,
     15,
-    0
+    4
    ],
    "concepts": [
     {
      "name": "人形机器人",
-     "pct": 3.04
+     "pct": 3.1
     },
     {
-     "name": "数字芯片设计",
-     "pct": 2.56
+     "name": "最近多板",
+     "pct": 2.77
     }
    ]
   },
   {
    "code": "300007",
    "name": "汉威科技",
-   "price": 41.76,
-   "pct": 5.45,
-   "amt_yi": 1.2,
-   "turnover": 1.03097,
-   "g60": 20.21,
+   "price": 43.79,
+   "pct": 10.58,
+   "amt_yi": 8.3,
+   "turnover": 6.81772,
+   "g60": 26.05,
    "pe": null,
    "main_net": 0,
-   "score": 55,
+   "score": 59,
    "parts": [
     40,
     0,
     15,
-    0
+    4
    ],
    "concepts": [
     {
      "name": "人形机器人",
-     "pct": 3.04
+     "pct": 3.11
     },
     {
-     "name": "元宇宙概念",
-     "pct": 2.61
+     "name": "传感器",
+     "pct": 2.27
     }
    ]
   },
   {
-   "code": "600327",
-   "name": "大东方",
-   "price": 5.94,
-   "pct": 10.0,
-   "amt_yi": 3.1,
-   "turnover": 5.99875,
-   "g60": 50.76,
+   "code": "603667",
+   "name": "五洲新春",
+   "price": 56.36,
+   "pct": 4.93,
+   "amt_yi": 8.1,
+   "turnover": 3.81337,
+   "g60": 3.77,
    "pe": null,
    "main_net": 0,
-   "score": 50,
+   "score": 59,
    "parts": [
     40,
     0,
-    10,
-    0
+    15,
+    4
    ],
    "concepts": [
     {
-     "name": "昨日涨停",
-     "pct": 3.38
+     "name": "机器人执行器",
+     "pct": 3.46
     },
     {
-     "name": "昨日连板",
-     "pct": 3.35
+     "name": "人形机器人",
+     "pct": 3.16
+    }
+   ]
+  },
+  {
+   "code": "600519",
+   "name": "贵州茅台",
+   "price": 1436.5,
+   "pct": -0.59,
+   "amt_yi": 8.0,
+   "turnover": 0.0446,
+   "g60": 6.5,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "超级品牌",
+     "pct": -0.32
+    },
+    {
+     "name": "茅指数",
+     "pct": -0.26
+    }
+   ]
+  },
+  {
+   "code": "300953",
+   "name": "震裕科技",
+   "price": 117.39,
+   "pct": 10.27,
+   "amt_yi": 7.8,
+   "turnover": 3.91254,
+   "g60": 16.63,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "人形机器人",
+     "pct": 3.21
+    },
+    {
+     "name": "飞行汽车(eVTOL)",
+     "pct": 2.17
+    }
+   ]
+  },
+  {
+   "code": "002241",
+   "name": "歌尔股份",
+   "price": 24.6,
+   "pct": -0.57,
+   "amt_yi": 7.7,
+   "turnover": 0.99876,
+   "g60": 7.75,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "茅指数",
+     "pct": -0.28
+    },
+    {
+     "name": "标准普尔",
+     "pct": 0.38
+    }
+   ]
+  },
+  {
+   "code": "688507",
+   "name": "索辰科技",
+   "price": 191.4,
+   "pct": 3.8,
+   "amt_yi": 7.4,
+   "turnover": 4.40632,
+   "g60": 11.66,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "近期新高",
+     "pct": 2.31
+    },
+    {
+     "name": "机器人概念",
+     "pct": 2.18
+    }
+   ]
+  },
+  {
+   "code": "000559",
+   "name": "万向钱潮",
+   "price": 13.64,
+   "pct": 6.31,
+   "amt_yi": 7.1,
+   "turnover": 1.59381,
+   "g60": 15.59,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "人形机器人",
+     "pct": 3.23
+    },
+    {
+     "name": "底盘与发动机系统",
+     "pct": 2.51
     }
    ]
   }
@@ -425,7 +425,7 @@
  "meta": {
   "name": "综合评分策略",
   "pool": 150,
-  "scored": 48,
+  "scored": 52,
   "rule": "成交额前150 → 60日涨幅为正预筛 → 逐只K线算 趋势40+资金30+动量15+活跃15",
   "source": "本地库 quant.db（新浪管线）",
   "fund_flow": "缺失(资金项降级为0)"
