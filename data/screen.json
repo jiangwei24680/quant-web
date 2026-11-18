@@ -6,8 +6,8 @@
    "name": "华胜天成",
    "price": 16.82,
    "pct": 10.01,
-   "amt_yi": 33.1,
-   "turnover": 18.4577,
+   "amt_yi": 33.3,
+   "turnover": 18.57961,
    "g60": 11.61,
    "pe": null,
    "main_net": 0,
@@ -21,50 +21,22 @@
    "concepts": [
     {
      "name": "昨日涨停",
-     "pct": 2.76
+     "pct": 2.16
     },
     {
-     "name": "最近多板",
-     "pct": 0.42
-    }
-   ]
-  },
-  {
-   "code": "301209",
-   "name": "联合化学",
-   "price": 61.83,
-   "pct": 16.75,
-   "amt_yi": 13.0,
-   "turnover": 15.40816,
-   "g60": 0.37,
-   "pe": null,
-   "main_net": 0,
-   "score": 62,
-   "parts": [
-    40,
-    0,
-    15,
-    7
-   ],
-   "concepts": [
-    {
-     "name": "昨日首板",
-     "pct": 3.08
-    },
-    {
-     "name": "昨日涨停",
-     "pct": 2.73
+     "name": "云计算",
+     "pct": 1.4
     }
    ]
   },
   {
    "code": "600519",
    "name": "贵州茅台",
-   "price": 1449.62,
-   "pct": -0.55,
-   "amt_yi": 12.7,
-   "turnover": 0.06995,
-   "g60": 11.68,
+   "price": 1446.86,
+   "pct": -0.74,
+   "amt_yi": 15.2,
+   "turnover": 0.08396,
+   "g60": 11.47,
    "pe": null,
    "main_net": 0,
    "score": 62,
@@ -76,12 +48,40 @@
    ],
    "concepts": [
     {
-     "name": "基金增仓",
-     "pct": -1.9
+     "name": "食品饮料",
+     "pct": -1.42
     },
     {
-     "name": "食品饮料",
-     "pct": -1.86
+     "name": "白酒Ⅱ",
+     "pct": -1.25
+    }
+   ]
+  },
+  {
+   "code": "601398",
+   "name": "工商银行",
+   "price": 9.07,
+   "pct": 0.11,
+   "amt_yi": 12.7,
+   "turnover": 0.05176,
+   "g60": 18.25,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "跨境支付",
+     "pct": 0.41
+    },
+    {
+     "name": "区块链",
+     "pct": 0.29
     }
    ]
   },
@@ -90,8 +90,8 @@
    "name": "旋极信息",
    "price": 4.44,
    "pct": 20.0,
-   "amt_yi": 11.7,
-   "turnover": 16.42317,
+   "amt_yi": 12.1,
+   "turnover": 17.05237,
    "g60": 19.03,
    "pe": null,
    "main_net": 0,
@@ -104,163 +104,135 @@
    ],
    "concepts": [
     {
-     "name": "时空大数据",
-     "pct": 0.17
-    },
-    {
      "name": "财税数字化",
-     "pct": -0.14
-    }
-   ]
-  },
-  {
-   "code": "601398",
-   "name": "工商银行",
-   "price": 9.08,
-   "pct": 0.22,
-   "amt_yi": 9.9,
-   "turnover": 0.0404,
-   "g60": 18.38,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "国有大型银行Ⅲ",
-     "pct": 0.32
+     "pct": 1.62
     },
     {
-     "name": "近期新高",
-     "pct": 0.31
+     "name": "时空大数据",
+     "pct": 1.28
     }
    ]
   },
   {
    "code": "000333",
    "name": "美的集团",
-   "price": 94.04,
-   "pct": 0.76,
-   "amt_yi": 9.6,
-   "turnover": 0.14928,
-   "g60": 12.51,
+   "price": 93.89,
+   "pct": 0.6,
+   "amt_yi": 11.8,
+   "turnover": 0.18182,
+   "g60": 12.34,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
      "name": "白色家电",
-     "pct": 3.49
+     "pct": 3.63
     },
     {
      "name": "空调",
-     "pct": 2.09
+     "pct": 1.78
     }
    ]
   },
   {
    "code": "600900",
    "name": "长江电力",
-   "price": 30.75,
-   "pct": 0.49,
-   "amt_yi": 9.6,
-   "turnover": 0.12859,
-   "g60": 9.35,
+   "price": 30.65,
+   "pct": 0.16,
+   "amt_yi": 11.7,
+   "turnover": 0.15537,
+   "g60": 9.0,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
      "name": "水力发电",
-     "pct": 0.57
+     "pct": 0.22
     },
     {
-     "name": "近期新高",
-     "pct": 0.31
-    }
-   ]
-  },
-  {
-   "code": "000651",
-   "name": "格力电器",
-   "price": 40.9,
-   "pct": 0.59,
-   "amt_yi": 8.5,
-   "turnover": 0.37708,
-   "g60": 2.1,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "白色家电",
-     "pct": 3.47
-    },
-    {
-     "name": "空调",
-     "pct": 2.09
+     "name": "电力",
+     "pct": 0.09
     }
    ]
   },
   {
    "code": "600036",
    "name": "招商银行",
-   "price": 43.29,
-   "pct": -0.37,
-   "amt_yi": 8.0,
-   "turnover": 0.08956,
-   "g60": 13.06,
+   "price": 43.25,
+   "pct": -0.46,
+   "amt_yi": 10.5,
+   "turnover": 0.11713,
+   "g60": 12.95,
    "pe": null,
    "main_net": 0,
-   "score": 59,
+   "score": 62,
    "parts": [
     40,
     0,
     15,
-    4
+    7
    ],
    "concepts": [
     {
-     "name": "基金减仓",
-     "pct": -1.45
+     "name": "茅指数",
+     "pct": -0.88
     },
     {
-     "name": "深圳特区",
-     "pct": -1.31
+     "name": "基金减仓",
+     "pct": -0.82
+    }
+   ]
+  },
+  {
+   "code": "000651",
+   "name": "格力电器",
+   "price": 40.73,
+   "pct": 0.17,
+   "amt_yi": 10.1,
+   "turnover": 0.44587,
+   "g60": 1.67,
+   "pe": null,
+   "main_net": 0,
+   "score": 62,
+   "parts": [
+    40,
+    0,
+    15,
+    7
+   ],
+   "concepts": [
+    {
+     "name": "白色家电",
+     "pct": 3.63
+    },
+    {
+     "name": "空调",
+     "pct": 1.78
     }
    ]
   },
   {
    "code": "600690",
    "name": "海尔智家",
-   "price": 22.57,
-   "pct": 1.21,
-   "amt_yi": 7.7,
-   "turnover": 0.55333,
-   "g60": 4.25,
+   "price": 22.56,
+   "pct": 1.17,
+   "amt_yi": 8.9,
+   "turnover": 0.63945,
+   "g60": 4.2,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -273,22 +245,22 @@
    "concepts": [
     {
      "name": "冰洗",
-     "pct": 4.23
+     "pct": 4.66
     },
     {
      "name": "白色家电",
-     "pct": 3.47
+     "pct": 3.62
     }
    ]
   },
   {
    "code": "002739",
    "name": "儒意电影",
-   "price": 9.94,
-   "pct": 1.64,
-   "amt_yi": 7.6,
-   "turnover": 3.64384,
-   "g60": 12.83,
+   "price": 9.78,
+   "pct": 0.0,
+   "amt_yi": 8.7,
+   "turnover": 4.17878,
+   "g60": 11.01,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -301,22 +273,22 @@
    "concepts": [
     {
      "name": "标准普尔",
-     "pct": -0.9
+     "pct": -0.54
     },
     {
      "name": "2026中报首亏",
-     "pct": -1.42
+     "pct": -0.65
     }
    ]
   },
   {
    "code": "000001",
    "name": "平安银行",
-   "price": 12.24,
-   "pct": -0.08,
-   "amt_yi": 7.3,
-   "turnover": 0.30577,
-   "g60": 10.77,
+   "price": 12.21,
+   "pct": -0.33,
+   "amt_yi": 8.5,
+   "turnover": 0.35851,
+   "g60": 10.5,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -329,22 +301,22 @@
    "concepts": [
     {
      "name": "基金减仓",
-     "pct": -1.46
+     "pct": -0.92
     },
     {
-     "name": "深圳特区",
-     "pct": -1.32
+     "name": "机构重仓",
+     "pct": -0.81
     }
    ]
   },
   {
    "code": "600406",
    "name": "国电南瑞",
-   "price": 24.67,
-   "pct": 0.69,
-   "amt_yi": 7.1,
-   "turnover": 0.35678,
-   "g60": 4.8,
+   "price": 24.62,
+   "pct": 0.49,
+   "amt_yi": 8.5,
+   "turnover": 0.42809,
+   "g60": 4.59,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -355,52 +327,24 @@
     4
    ],
    "concepts": [
+    {
+     "name": "数据中心",
+     "pct": 0.43
+    },
     {
      "name": "中特估",
-     "pct": 0.13
-    },
-    {
-     "name": "抽水蓄能",
-     "pct": -0.18
-    }
-   ]
-  },
-  {
-   "code": "600467",
-   "name": "好当家",
-   "price": 2.84,
-   "pct": 3.27,
-   "amt_yi": 7.0,
-   "turnover": 17.24749,
-   "g60": 18.83,
-   "pe": null,
-   "main_net": 0,
-   "score": 59,
-   "parts": [
-    40,
-    0,
-    15,
-    4
-   ],
-   "concepts": [
-    {
-     "name": "昨日涨停",
-     "pct": 2.71
-    },
-    {
-     "name": "最近多板",
-     "pct": 0.38
+     "pct": 0.25
     }
    ]
   },
   {
    "code": "600941",
    "name": "中国移动",
-   "price": 106.5,
-   "pct": 1.24,
-   "amt_yi": 6.5,
-   "turnover": 0.68227,
-   "g60": 11.24,
+   "price": 106.43,
+   "pct": 1.17,
+   "amt_yi": 7.9,
+   "turnover": 0.82504,
+   "g60": 11.17,
    "pe": null,
    "main_net": 0,
    "score": 59,
@@ -412,12 +356,68 @@
    ],
    "concepts": [
     {
-     "name": "电信运营商",
-     "pct": 1.12
+     "name": "通信服务",
+     "pct": 2.93
     },
     {
+     "name": "算力租赁",
+     "pct": 2.18
+    }
+   ]
+  },
+  {
+   "code": "002714",
+   "name": "牧原股份",
+   "price": 45.2,
+   "pct": -1.35,
+   "amt_yi": 7.6,
+   "turnover": 0.51284,
+   "g60": 13.2,
+   "pe": null,
+   "main_net": 0,
+   "score": 59,
+   "parts": [
+    40,
+    0,
+    15,
+    4
+   ],
+   "concepts": [
+    {
+     "name": "生猪养殖",
+     "pct": -1.75
+    },
+    {
+     "name": "合成生物",
+     "pct": -1.68
+    }
+   ]
+  },
+  {
+   "code": "002148",
+   "name": "北纬科技",
+   "price": 8.92,
+   "pct": 9.99,
+   "amt_yi": 11.4,
+   "turnover": 28.60153,
+   "g60": 35.77,
+   "pe": null,
+   "main_net": 0,
+   "score": 57,
+   "parts": [
+    40,
+    0,
+    10,
+    7
+   ],
+   "concepts": [
+    {
      "name": "通信服务",
-     "pct": 0.76
+     "pct": 2.95
+    },
+    {
+     "name": "通信应用增值服务",
+     "pct": 1.68
     }
    ]
   }
@@ -425,7 +425,7 @@
  "meta": {
   "name": "综合评分策略",
   "pool": 150,
-  "scored": 39,
+  "scored": 36,
   "rule": "成交额前150 → 60日涨幅为正预筛 → 逐只K线算 趋势40+资金30+动量15+活跃15",
   "source": "本地库 quant.db（新浪管线）",
   "fund_flow": "缺失(资金项降级为0)"
